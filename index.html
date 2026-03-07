@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theory of Biological Design — ICR</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0e1a;
+    --paper: #f4f0e8;
+    --gold: #c9973a;
+    --gold-light: #e8b96a;
+    --blue-deep: #0d1b3e;
+    --blue-mid: #1a3060;
+    --teal: #2a7f8a;
+    --teal-light: #4ab5c4;
+    --wrong-text: #e07070;
+    --right-text: #6ec89a;
+    --muted: #6b7590;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--ink); color: var(--paper); font-family: 'IBM Plex Sans', sans-serif; overflow-x: hidden; }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem; border-bottom: 1px solid rgba(201,151,58,0.2);
+    background: rgba(10,14,26,0.95); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px);
+  }
+  .nav-logo { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--paper); }
+  .nav-cta { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 0.5rem 1.2rem; text-decoration: none; transition: all 0.2s; }
+  .nav-cta:hover { background: var(--gold); color: var(--ink); }
+
+  .hero { min-height: 90vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 0 3rem; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 70% 50%, rgba(42,127,138,0.12) 0%, transparent 70%), radial-gradient(ellipse 40% 80% at 90% 20%, rgba(201,151,58,0.06) 0%, transparent 60%); pointer-events: none; }
+  .hero-grid-overlay { position: absolute; inset: 0; background-image: linear-gradient(rgba(201,151,58,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,151,58,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+  .hero-left { position: relative; z-index: 2; padding-right: 4rem; }
+  .hero-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+  .hero-eyebrow::before { content: ''; width: 2rem; height: 1px; background: var(--gold); }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 1.5rem; color: var(--paper); }
+  .hero-title em { font-style: normal; color: var(--gold); }
+  .hero-subtitle { font-size: 1.05rem; line-height: 1.75; color: rgba(244,240,232,0.65); max-width: 480px; margin-bottom: 2.5rem; font-weight: 300; }
+  .hero-buttons { display: flex; gap: 1rem; align-items: center; }
+  .btn-primary { background: var(--gold); color: var(--ink); padding: 0.85rem 2rem; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; border: none; cursor: pointer; transition: all 0.2s; }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-ghost { background: transparent; color: var(--paper); padding: 0.85rem 2rem; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid rgba(244,240,232,0.25); cursor: pointer; transition: all 0.2s; }
+  .btn-ghost:hover { border-color: var(--paper); }
+  .hero-right { position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; }
+  .hero-diagram { width: 380px; height: 380px; position: relative; }
+  .diagram-ring { position: absolute; border-radius: 50%; border: 1px solid; }
+  .ring-1 { inset: 0; border-color: rgba(201,151,58,0.25); animation: spin-slow 40s linear infinite; }
+  .ring-2 { inset: 40px; border-color: rgba(42,127,138,0.3); animation: spin-slow 25s linear infinite reverse; }
+  .ring-3 { inset: 80px; border-color: rgba(201,151,58,0.15); animation: spin-slow 15s linear infinite; }
+  @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .diagram-center { position: absolute; inset: 120px; background: var(--blue-deep); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid rgba(201,151,58,0.4); box-shadow: 0 0 40px rgba(42,127,138,0.15); }
+  .diagram-center-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.3rem; }
+  .diagram-center-main { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--paper); line-height: 1; }
+  .diagram-node { position: absolute; width: 64px; height: 64px; background: var(--blue-mid); border: 1px solid rgba(42,127,138,0.5); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1.2rem; }
+  .node-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.42rem; letter-spacing: 0.08em; color: var(--teal-light); text-transform: uppercase; margin-top: 2px; text-align: center; line-height: 1.2; }
+  .node-top { top: 12px; left: 50%; transform: translateX(-50%); }
+  .node-right { right: 12px; top: 50%; transform: translateY(-50%); }
+  .node-bottom { bottom: 12px; left: 50%; transform: translateX(-50%); }
+  .node-left { left: 12px; top: 50%; transform: translateY(-50%); }
+
+  hr.section-divider { border: none; border-top: 1px solid rgba(201,151,58,0.15); }
+
+  .section-header { padding: 4rem 3rem 2rem; display: flex; align-items: baseline; gap: 1.5rem; }
+  .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--paper); }
+  .section-line { flex: 1; height: 1px; background: rgba(201,151,58,0.2); margin-bottom: 0.3rem; }
+
+  .reversals-intro { padding: 0 3rem 2rem; max-width: 640px; font-size: 0.95rem; line-height: 1.7; color: rgba(244,240,232,0.6); }
+
+  /* Carousel */
+  .reversals-carousel { margin: 0 3rem; display: flex; align-items: stretch; }
+  .carousel-nav-btn { background: var(--blue-deep); border: 1px solid rgba(201,151,58,0.15); color: var(--gold); font-size: 1.6rem; width: 48px; flex-shrink: 0; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; }
+  .carousel-nav-btn:hover:not(:disabled) { background: rgba(201,151,58,0.1); color: var(--gold-light); }
+  .carousel-nav-btn:disabled { opacity: 0.2; cursor: default; }
+  .carousel-nav-btn.btn-prev { border-right: none; }
+  .carousel-nav-btn.btn-next { border-left: none; }
+
+  .reversals-grid { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(201,151,58,0.1); }
+
+  /* Cards with flex-column so Explore stays at bottom */
+  .reversal-card { background: var(--ink); padding: 2rem 1.5rem; cursor: pointer; transition: background 0.2s; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+  .reversal-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--teal); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+  .reversal-card:hover { background: rgba(26,48,96,0.4); }
+  .reversal-card:hover::after { transform: scaleX(1); }
+  .reversal-card.active { background: rgba(26,48,96,0.6); }
+  .reversal-card.active::after { transform: scaleX(1); background: var(--gold); }
+  .card-number { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 0.8rem; }
+  .card-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; line-height: 1.3; color: var(--paper); margin-bottom: 0.6rem; }
+  .card-desc { font-size: 0.78rem; line-height: 1.6; color: var(--muted); flex: 1; } /* flex:1 pushes arrow to bottom */
+  .card-arrow { margin-top: 1.2rem; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-light); display: flex; align-items: center; gap: 0.5rem; }
+
+  /* Dots */
+  .carousel-dots { display: flex; justify-content: center; gap: 0.5rem; margin: 0.8rem 3rem; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(201,151,58,0.25); cursor: pointer; transition: background 0.2s; }
+  .dot.active { background: var(--gold); }
+
+  /* Detail panel — equal height panels, top-aligned text */
+  .reversal-detail { background: var(--blue-deep); margin: 0 3rem; padding: 3rem; border-top: 2px solid var(--gold); display: grid; grid-template-columns: 1fr auto 1fr; gap: 2rem; align-items: start; }
+  .detail-panel { padding: 2rem; border: 1px solid; display: flex; flex-direction: column; }
+  .panel-wrong { border-color: rgba(92,42,42,0.6); background: rgba(92,42,42,0.1); }
+  .panel-right { border-color: rgba(26,58,42,0.8); background: rgba(26,58,42,0.15); }
+  .panel-badge { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+  .badge-wrong { color: var(--wrong-text); }
+  .badge-right { color: var(--right-text); }
+  .panel-heading { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; line-height: 1.4; margin-bottom: 1rem; flex-shrink: 0; }
+  .panel-wrong .panel-heading { color: rgba(244,240,232,0.5); }
+  .panel-right .panel-heading { color: var(--paper); }
+  .panel-body { font-size: 0.85rem; line-height: 1.7; }
+  .panel-wrong .panel-body { color: rgba(244,240,232,0.5); }
+  .panel-right .panel-body { color: rgba(244,240,232,0.75); }
+
+  .flip-arrow { font-size: 1.5rem; color: var(--gold); display: flex; flex-direction: column; align-items: center; gap: 0.4rem; padding-top: 3.5rem; }
+  .flip-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); writing-mode: vertical-rl; }
+
+  .ask-row { grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+  .ask-btn { background: transparent; border: 1px solid rgba(42,127,138,0.5); color: var(--teal-light); padding: 0.7rem 1.8rem; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+  .ask-btn:hover:not(:disabled) { background: rgba(42,127,138,0.1); border-color: var(--teal-light); }
+  .ask-btn:disabled { opacity: 0.4; cursor: default; }
+  .ai-quota { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted); }
+  .ai-quota.exhausted { color: var(--wrong-text); }
+
+  .ai-area { grid-column: 1 / -1; display: none; flex-direction: column; gap: 0.8rem; margin-top: 0.5rem; border-top: 1px solid rgba(42,127,138,0.2); padding-top: 1.5rem; }
+  .ai-area.open { display: flex; }
+  .ai-input-row { display: flex; gap: 0.8rem; }
+  .ai-input { flex: 1; background: rgba(26,48,96,0.4); border: 1px solid rgba(42,127,138,0.3); color: var(--paper); padding: 0.75rem 1rem; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.88rem; outline: none; transition: border-color 0.2s; }
+  .ai-input:focus { border-color: var(--teal-light); }
+  .ai-input::placeholder { color: var(--muted); }
+  .ai-send { background: var(--teal); color: var(--paper); border: none; padding: 0.75rem 1.4rem; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+  .ai-send:hover:not(:disabled) { background: var(--teal-light); color: var(--ink); }
+  .ai-send:disabled { opacity: 0.4; cursor: default; }
+  .ai-response { background: rgba(10,14,26,0.6); border-left: 2px solid var(--teal); padding: 1rem 1.2rem; font-size: 0.88rem; line-height: 1.75; color: rgba(244,240,232,0.85); display: none; }
+  .ai-response.visible { display: block; }
+  .ai-response.loading { color: var(--muted); font-style: italic; }
+
+  /* Case studies — flex-column for bottom-aligned tag */
+  .case-studies { padding: 4rem 3rem; }
+  .case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+  .case-card { border: 1px solid rgba(201,151,58,0.12); padding: 2rem; position: relative; overflow: hidden; transition: border-color 0.2s; cursor: pointer; display: flex; flex-direction: column; }
+  .case-card:hover { border-color: rgba(42,127,138,0.4); }
+  .case-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--teal), var(--gold)); opacity: 0; transition: opacity 0.2s; }
+  .case-card:hover::before { opacity: 1; }
+  .case-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .case-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--paper); margin-bottom: 0.5rem; }
+  .case-subtitle { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+  .case-body { font-size: 0.83rem; line-height: 1.65; color: var(--muted); flex: 1; }
+  .case-tag { display: inline-block; margin-top: 1.2rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-light); border: 1px solid rgba(42,127,138,0.3); padding: 0.25rem 0.6rem; align-self: flex-start; }
+
+  .quote-section { padding: 5rem 3rem; text-align: center; position: relative; border-top: 1px solid rgba(201,151,58,0.1); border-bottom: 1px solid rgba(201,151,58,0.1); background: rgba(26,48,96,0.08); }
+  .quote-mark { font-family: 'Playfair Display', serif; font-size: 6rem; line-height: 0.5; color: rgba(201,151,58,0.15); margin-bottom: 1rem; }
+  .quote-text { font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 2.5vw, 1.8rem); font-weight: 400; font-style: italic; line-height: 1.5; color: var(--paper); max-width: 720px; margin: 0 auto 1.5rem; }
+  .quote-text em { font-style: normal; color: var(--gold); }
+  .quote-attr { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+
+  footer { padding: 3rem; border-top: 1px solid rgba(201,151,58,0.15); display: flex; justify-content: space-between; align-items: center; }
+  .footer-left { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+  .footer-right { font-size: 0.75rem; color: var(--muted); }
+  .footer-right a { color: var(--gold); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">ICR · Theory of Biological Design</div>
+  <ul class="nav-links">
+    <li><a href="#">Framework</a></li>
+    <li><a href="#">Reversals</a></li>
+    <li><a href="#">Case Studies</a></li>
+    <li><a href="#">Research</a></li>
+    <li><a href="#">About CET</a></li>
+  </ul>
+  <a href="https://icr.org" class="nav-cta">ICR.org ↗</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid-overlay"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Institute for Creation Research</div>
+    <h1 class="hero-title">Biology Through<br>an <em>Engineer's</em><br>Lens</h1>
+    <p class="hero-subtitle">The Theory of Biological Design proposes that organisms are not passively shaped by their environment — they are <strong>intelligently engineered</strong> to actively track and respond to it. Explore the framework that is changing how creation scientists interpret life.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary" onclick="document.querySelector('.section-header').scrollIntoView({behavior:'smooth'})">Explore the Framework</button>
+      <button class="btn-ghost">Watch: Dr. Guliuzza ↗</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-diagram">
+      <div class="diagram-ring ring-1"></div>
+      <div class="diagram-ring ring-2"></div>
+      <div class="diagram-ring ring-3"></div>
+      <div class="diagram-center">
+        <div class="diagram-center-label">Framework</div>
+        <div class="diagram-center-main">TOBD</div>
+      </div>
+      <div class="diagram-node node-top">🧬<div class="node-label">DNA<br>Design</div></div>
+      <div class="diagram-node node-right">⚙️<div class="node-label">Engineering<br>Principles</div></div>
+      <div class="diagram-node node-bottom">🐟<div class="node-label">CET<br>Model</div></div>
+      <div class="diagram-node node-left">🦉<div class="node-label">Case<br>Studies</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<div class="section-header">
+  <span class="section-label">Core Framework</span>
+  <h2 class="section-title">The Paradigm Reversals</h2>
+  <div class="section-line"></div>
+</div>
+<p class="reversals-intro">Dr. Guliuzza identified key places where Darwinian biology inverted the truth. Each reversal restores the engineering-based understanding that existed before Darwin — and makes far better sense of what we actually observe.</p>
+
+<div class="reversals-carousel">
+  <button class="carousel-nav-btn btn-prev" id="btn-prev" onclick="shiftPage(-1)" disabled>&#8249;</button>
+  <div class="reversals-grid" id="reversals-grid"></div>
+  <button class="carousel-nav-btn btn-next" id="btn-next" onclick="shiftPage(1)">&#8250;</button>
+</div>
+<div class="carousel-dots" id="carousel-dots"></div>
+
+<div class="reversal-detail" id="detail-panel">
+  <div class="detail-panel panel-wrong" id="panel-wrong">
+    <div class="panel-badge badge-wrong">✗ &nbsp; Selectionist View</div>
+    <div class="panel-heading" id="detail-wrong-heading"></div>
+    <div class="panel-body" id="detail-wrong-body"></div>
+  </div>
+  <div class="flip-arrow">
+    <div class="flip-label">reversed</div>
+    &#10230;
+  </div>
+  <div class="detail-panel panel-right" id="panel-right">
+    <div class="panel-badge badge-right">✓ &nbsp; Engineering View</div>
+    <div class="panel-heading" id="detail-right-heading"></div>
+    <div class="panel-body" id="detail-right-body"></div>
+  </div>
+  <div class="ask-row">
+    <button class="ask-btn" id="ask-toggle-btn" onclick="toggleAI()">✦ &nbsp; Ask a question about this concept</button>
+    <span class="ai-quota" id="ai-quota"></span>
+  </div>
+  <div class="ai-area" id="ai-area">
+    <div class="ai-input-row">
+      <input class="ai-input" id="ai-input" type="text" placeholder="E.g. What does this mean for how we study cavefish?" />
+      <button class="ai-send" id="ai-send" onclick="askAI()">Ask →</button>
+    </div>
+    <div class="ai-response" id="ai-response"></div>
+  </div>
+</div>
+
+<section class="case-studies">
+  <div class="section-header" style="padding: 0 0 2rem;">
+    <span class="section-label">Real-World Evidence</span>
+    <h2 class="section-title">Case Studies in Engineered Biology</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="case-grid">
+    <div class="case-card">
+      <div class="case-icon">🐟</div>
+      <div class="case-subtitle">Continuous Environmental Tracking</div>
+      <div class="case-title">The Cavefish Model</div>
+      <div class="case-body">When fish enter dark caves, they don't lose their eyes because the cave "does" anything to them. Their own internal engineering system reallocates resources — the organism is the agent, not the environment.</div>
+      <span class="case-tag">CET Model</span>
+    </div>
+    <div class="case-card">
+      <div class="case-icon">🦉</div>
+      <div class="case-subtitle">Aerodynamics &amp; Material Science</div>
+      <div class="case-title">Owl Wing Acoustics</div>
+      <div class="case-body">Owl feathers are so perfectly engineered for silent flight that available microphones are "at their limits" measuring it. Engineering principles explain what selectionism cannot — optimization toward a goal.</div>
+      <span class="case-tag">Design Evidence</span>
+    </div>
+    <div class="case-card">
+      <div class="case-icon">🌱</div>
+      <div class="case-subtitle">Developmental Biology</div>
+      <div class="case-title">Embryonic Clocks</div>
+      <div class="case-body">Embryos operate with internal timing systems that mirror human construction schedules — with logic-based controllers, sensors, and pre-programmed decision trees. Not random. Engineered.</div>
+      <span class="case-tag">TOBD Research</span>
+    </div>
+  </div>
+</section>
+
+<section class="quote-section">
+  <div class="quote-mark">"</div>
+  <p class="quote-text">The most likely reason creatures <em>look engineered</em><br>is that they <em>are engineered</em>.</p>
+  <div class="quote-attr">— Dr. Randy Guliuzza &nbsp;·&nbsp; President, Institute for Creation Research</div>
+</section>
+
+<footer>
+  <div class="footer-left">Institute for Creation Research<br>Theory of Biological Design · Interactive Explorer<br>An educational resource based on ICR research</div>
+  <div class="footer-right">Built to explore creation science · <a href="https://icr.org">icr.org ↗</a></div>
+</footer>
+
+<script>
+const reversals = [
+  { num:'01', title:'Life & Operations', desc:'Does life emerge from biology, or does life enable biology?',
+    wrongH:'"Life emerges FROM biological operations"',
+    wrongB:'Evolutionary theory holds that nonliving chemicals somehow gave rise to living cells, that purposeless interactions produced purposeful systems, and that life itself is a byproduct of the right biological conditions.',
+    rightH:'"Life is what ENABLES ongoing biological operations"',
+    rightB:'A TOBD holds that organisms are completed, engineered entities. Life is not produced by chemistry — life is what makes chemistry purposeful. Organisms possess innate agency that no arrangement of nonliving parts can generate.' },
+  { num:'02', title:'Agency & Purpose', desc:'Are organisms passive clay or active, goal-directed agents?',
+    wrongH:'"Organisms are passive products of external forces"',
+    wrongB:'Selectionism imagines organisms as modeling clay, slowly sculpted by environmental pressures, random mutations, and survival competition. The organism itself has no meaningful role in directing its own change.',
+    rightH:'"Organisms are active, goal-directed engineering agents"',
+    rightB:'A TOBD recognizes that organisms approach their environments as active problem-solvers with innate capabilities. They have agency. Their traits — not the environment — determine what they can accomplish.' },
+  { num:'03', title:'Adaptation & Environment', desc:'Does the environment shape organisms, or do organisms track their environment?',
+    wrongH:'"The environment shapes organisms over time"',
+    wrongB:"Darwin's externalism proposes that environments slowly construct organisms through selective pressure. The environment is the creative force; the organism is the result. 'Natural selection' is credited as an active agent.",
+    rightH:'"Organisms are engineered to actively track their environment"',
+    rightB:'Continuous Environmental Tracking (CET) shows that organisms possess innate sensor and response systems that allow them to detect changing conditions and direct their own purposeful adjustments — from internal engineering.' },
+  { num:'04', title:'Causation & Design', desc:'Is randomness the engine of complexity, or is engineering causality the answer?',
+    wrongH:'"Randomness + selection = biological complexity"',
+    wrongB:"The evolutionary narrative requires that unguided random mutations, filtered by impersonal 'selection pressures,' can build the extraordinarily complex, purposeful systems we find in living organisms. No engineer is needed.",
+    rightH:'"Engineering causality explains biological complexity"',
+    rightB:'Engineering principles demand clarity, objectivity, and verifiable causes. A TOBD applies these same standards to biology — rejecting unobservable "selection events" and seeking identifiable, innate control systems that actually govern life.' },
+  { num:'05', title:'Externalism vs. Internalism', desc:'Does change come from outside the organism or from within it?',
+    wrongH:'"External conditions are the source of biological change"',
+    wrongB:"Harvard geneticist Richard Lewontin summarized the evolutionary view: 'It is from this view of environment as the cause of organism that the entire corpus of modern biology arises.' The organism is the result, never the cause.",
+    rightH:'"Innate internal systems drive all biological adaptation"',
+    rightB:"Internalism holds that an organism's capabilities are entirely determined by its innate, engineered traits. These exist prior to any environmental exposure. What a creature can do is set by its design, not by what happens to it." },
+  { num:'06', title:'Common Design vs. Common Ancestry', desc:'Do similar features mean shared ancestors, or a shared Designer?',
+    wrongH:'"Similar features prove descent from a common ancestor"',
+    wrongB:'Evolutionary theory interprets biological similarity — shared genes, shared body plans, shared molecular machinery — as evidence that all life descended from a single common ancestor through gradual modification.',
+    rightH:'"Similar features reflect a common Designer\'s engineering logic"',
+    rightB:"Engineers reuse proven solutions across different products. The discovery of Hox genes — the same regulatory genes controlling body plans across wildly different animals — stunned evolutionists. A TOBD predicted it: one Designer, one engineering playbook." }
+];
+
+const PAGE_SIZE = 4;
+let pageStart = 0;
+let activeIdx = 0;
+let aiOpen = false;
+let questionsLeft = 5;
+
+function renderCards() {
+  const grid = document.getElementById('reversals-grid');
+  grid.innerHTML = '';
+  reversals.slice(pageStart, pageStart + PAGE_SIZE).forEach((r, i) => {
+    const gIdx = pageStart + i;
+    const div = document.createElement('div');
+    div.className = 'reversal-card' + (gIdx === activeIdx ? ' active' : '');
+    div.innerHTML = `<div class="card-number">— ${r.num}</div><div class="card-title">${r.title}</div><div class="card-desc">${r.desc}</div><div class="card-arrow">Explore <span>→</span></div>`;
+    div.onclick = () => selectReversal(gIdx);
+    grid.appendChild(div);
+  });
+  document.getElementById('btn-prev').disabled = pageStart === 0;
+  document.getElementById('btn-next').disabled = pageStart + PAGE_SIZE >= reversals.length;
+  renderDots();
+}
+
+function renderDots() {
+  const c = document.getElementById('carousel-dots');
+  c.innerHTML = '';
+  const pages = Math.ceil(reversals.length / PAGE_SIZE);
+  const cur = Math.floor(pageStart / PAGE_SIZE);
+  for (let p = 0; p < pages; p++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (cur === p ? ' active' : '');
+    d.onclick = () => { pageStart = p * PAGE_SIZE; renderCards(); };
+    c.appendChild(d);
+  }
+}
+
+function shiftPage(dir) {
+  pageStart = Math.max(0, Math.min(reversals.length - PAGE_SIZE, pageStart + dir * PAGE_SIZE));
+  renderCards();
+}
+
+function selectReversal(idx) {
+  activeIdx = idx;
+  renderCards();
+  const r = reversals[idx];
+  document.getElementById('detail-wrong-heading').textContent = r.wrongH;
+  document.getElementById('detail-wrong-body').textContent = r.wrongB;
+  document.getElementById('detail-right-heading').textContent = r.rightH;
+  document.getElementById('detail-right-body').textContent = r.rightB;
+  // Sync panel heights
+  const pw = document.getElementById('panel-wrong');
+  const pr = document.getElementById('panel-right');
+  pw.style.minHeight = ''; pr.style.minHeight = '';
+  requestAnimationFrame(() => {
+    const h = Math.max(pw.scrollHeight, pr.scrollHeight);
+    pw.style.minHeight = h + 'px'; pr.style.minHeight = h + 'px';
+  });
+  // Reset AI
+  document.getElementById('ai-response').className = 'ai-response';
+  document.getElementById('ai-response').textContent = '';
+  document.getElementById('ai-input').value = '';
+  document.getElementById('detail-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function updateQuotaDisplay() {
+  const el = document.getElementById('ai-quota');
+  el.textContent = questionsLeft > 0 ? `${questionsLeft} question${questionsLeft !== 1 ? 's' : ''} remaining this session` : 'Session limit reached';
+  el.className = 'ai-quota' + (questionsLeft === 0 ? ' exhausted' : '');
+  const exhausted = questionsLeft === 0;
+  document.getElementById('ai-send').disabled = exhausted;
+  document.getElementById('ai-input').disabled = exhausted;
+  if (exhausted) document.getElementById('ask-toggle-btn').disabled = true;
+}
+
+function toggleAI() {
+  aiOpen = !aiOpen;
+  document.getElementById('ai-area').className = 'ai-area' + (aiOpen ? ' open' : '');
+  if (aiOpen) { updateQuotaDisplay(); document.getElementById('ai-input').focus(); }
+}
+
+async function askAI() {
+  if (questionsLeft <= 0) return;
+  const input = document.getElementById('ai-input');
+  const question = input.value.trim();
+  if (!question) return;
+  const r = reversals[activeIdx];
+  const context = `Reversal: "${r.title}". Engineering view: "${r.rightH}" — ${r.rightB}`;
+  const responseEl = document.getElementById('ai-response');
+  responseEl.className = 'ai-response visible loading';
+  responseEl.textContent = 'Thinking…';
+  document.getElementById('ai-send').disabled = true;
+  try {
+    const res = await fetch('https://tobd-api-proxy.kestes60.workers.dev/', {
+      method: 'POST',
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514', max_tokens: 1000,
+        system: `You are a knowledgeable guide for the Institute for Creation Research's Theory of Biological Design (TOBD), developed by Dr. Randy Guliuzza. Answer questions clearly, confidently, and accessibly. You are not adversarial toward evolutionists — you present the engineering-based creation science view with clarity and respect. Keep answers to 3-5 sentences unless more depth is genuinely needed. Always connect the answer back to the specific reversal concept being discussed.`,
+        messages: [{ role: 'user', content: `Context: ${context}\n\nQuestion: ${question}` }]
+      })
+    });
+    const data = await res.json();
+    responseEl.className = 'ai-response visible';
+    responseEl.textContent = data.content?.[0]?.text || 'No response received.';
+    questionsLeft--;
+    input.value = '';
+    updateQuotaDisplay();
+  } catch (err) {
+    responseEl.className = 'ai-response visible';
+    responseEl.textContent = 'There was an error reaching the AI. Please try again.';
+    if (questionsLeft > 0) document.getElementById('ai-send').disabled = false;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('ai-input').addEventListener('keydown', e => { if (e.key === 'Enter') askAI(); });
+  renderCards();
+  selectReversal(0);
+});
+</script>
+</body>
+</html>
