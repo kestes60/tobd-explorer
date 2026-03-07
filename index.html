@@ -50,20 +50,34 @@
   .btn-ghost:hover { border-color: var(--paper); }
   .hero-right { position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; }
   .hero-diagram { width: 380px; height: 380px; position: relative; }
-  .diagram-ring { position: absolute; border-radius: 50%; border: 1px solid; }
-  .ring-1 { inset: 0; border-color: rgba(201,151,58,0.25); animation: spin-slow 40s linear infinite; }
-  .ring-2 { inset: 40px; border-color: rgba(42,127,138,0.3); animation: spin-slow 25s linear infinite reverse; }
-  .ring-3 { inset: 80px; border-color: rgba(201,151,58,0.15); animation: spin-slow 15s linear infinite; }
-  @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  .diagram-center { position: absolute; inset: 120px; background: var(--blue-deep); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid rgba(201,151,58,0.4); box-shadow: 0 0 40px rgba(42,127,138,0.15); }
+  @keyframes orbit-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes orbit-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+
+  /* SVG overlay for rings + comets */
+  .diagram-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+  /* Comet groups rotate around SVG center 190,190 */
+  .comet-g1 { transform-origin: 190px 190px; animation: orbit-cw 10s linear infinite; }
+  .comet-g2 { transform-origin: 190px 190px; animation: orbit-cw 17s linear infinite; }
+  .comet-g3 { transform-origin: 190px 190px; animation: orbit-cw 26s linear infinite; }
+
+  /* Single clockwise orbit wrapper — all 4 nodes travel together */
+  .orbit-single { position: absolute; inset: 0; transform-origin: 190px 190px; animation: orbit-cw 20s linear infinite; }
+
+  .diagram-node { position: absolute; width: 60px; height: 60px; background: var(--blue-mid); border: 1px solid rgba(42,127,138,0.6); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 14px rgba(42,127,138,0.25); }
+  /* 90° apart on orbit radius 159px from center 190,190 — node size 60, so offset -30 */
+  .dn-0 { top:   1px; left: 160px; } /* top    */
+  .dn-1 { top: 160px; left: 319px; } /* right  */
+  .dn-2 { top: 319px; left: 160px; } /* bottom */
+  .dn-3 { top: 160px; left:   1px; } /* left   */
+
+  /* Counter-rotate node contents so emoji stays upright */
+  .node-inner { animation: orbit-ccw 20s linear infinite; display: flex; flex-direction: column; align-items: center; font-size: 1.1rem; }
+  .node-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.42rem; letter-spacing: 0.08em; color: var(--teal-light); text-transform: uppercase; margin-top: 2px; text-align: center; line-height: 1.2; }
+
+  .diagram-center { position: absolute; inset: 120px; background: var(--blue-deep); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid rgba(201,151,58,0.4); box-shadow: 0 0 40px rgba(42,127,138,0.15); z-index: 2; }
   .diagram-center-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.3rem; }
   .diagram-center-main { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--paper); line-height: 1; }
-  .diagram-node { position: absolute; width: 64px; height: 64px; background: var(--blue-mid); border: 1px solid rgba(42,127,138,0.5); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1.2rem; }
-  .node-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.42rem; letter-spacing: 0.08em; color: var(--teal-light); text-transform: uppercase; margin-top: 2px; text-align: center; line-height: 1.2; }
-  .node-top { top: 12px; left: 50%; transform: translateX(-50%); }
-  .node-right { right: 12px; top: 50%; transform: translateY(-50%); }
-  .node-bottom { bottom: 12px; left: 50%; transform: translateX(-50%); }
-  .node-left { left: 12px; top: 50%; transform: translateY(-50%); }
 
   hr.section-divider { border: none; border-top: 1px solid rgba(201,151,58,0.15); }
 
@@ -162,6 +176,73 @@
   .footer-left { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
   .footer-right { font-size: 0.75rem; color: var(--muted); }
   .footer-right a { color: var(--gold); text-decoration: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+
+    /* Nav: hide links, keep logo + ICR link */
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+
+    /* Hero: stack vertically, hide diagram */
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      padding: 3rem 1.5rem 2rem;
+    }
+    .hero-right { display: none; }
+    .hero-left { padding-right: 0; }
+    .hero-subtitle { max-width: 100%; }
+    .hero-buttons { flex-direction: column; align-items: flex-start; }
+    .btn-primary, .btn-ghost { width: 100%; text-align: center; }
+
+    /* Section headers */
+    .section-header { padding: 2.5rem 1.5rem 1.5rem; flex-wrap: wrap; gap: 0.5rem; }
+    .section-line { display: none; }
+    .reversals-intro { padding: 0 1.5rem 1.5rem; }
+
+    /* Carousel: show 2 cards, smaller nav buttons */
+    .reversals-carousel { margin: 0 1.5rem; }
+    .reversals-grid { grid-template-columns: repeat(2, 1fr); }
+    .carousel-dots { margin: 0.8rem 1.5rem; }
+
+    /* Detail panel: stack vertically */
+    .reversal-detail {
+      margin: 0 1.5rem;
+      padding: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+    .flip-arrow {
+      flex-direction: row;
+      padding-top: 0;
+      justify-content: center;
+      padding: 0.5rem 0;
+    }
+    .flip-label { writing-mode: horizontal-tb; }
+
+    /* Force equal heights off on mobile — just stack naturally */
+    .detail-panel { min-height: unset !important; }
+
+    /* AI area */
+    .ai-input-row { flex-direction: column; }
+    .ai-send { width: 100%; }
+
+    /* Case studies: single column */
+    .case-studies { padding: 2.5rem 1.5rem; }
+    .case-grid { grid-template-columns: 1fr; }
+
+    /* Quote */
+    .quote-section { padding: 3rem 1.5rem; }
+
+    /* Footer: stack */
+    footer { flex-direction: column; gap: 1rem; padding: 2rem 1.5rem; text-align: center; }
+  }
+
+  @media (max-width: 480px) {
+    /* On very small phones, single column cards */
+    .reversals-grid { grid-template-columns: 1fr; }
+    .reversal-card { padding: 1.5rem 1rem; }
+  }
 </style>
 </head>
 <body>
@@ -191,17 +272,58 @@
   </div>
   <div class="hero-right">
     <div class="hero-diagram">
-      <div class="diagram-ring ring-1"></div>
-      <div class="diagram-ring ring-2"></div>
-      <div class="diagram-ring ring-3"></div>
+      <!-- SVG: solid base rings + three animated comet trails -->
+      <svg class="diagram-svg" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow-gold" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glow-teal" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="2.5" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Base rings: solid, faint -->
+        <circle cx="190" cy="190" r="185" fill="none" stroke="rgba(201,151,58,0.15)" stroke-width="1"/>
+        <circle cx="190" cy="190" r="145" fill="none" stroke="rgba(42,127,138,0.18)" stroke-width="1"/>
+        <circle cx="190" cy="190" r="105" fill="none" stroke="rgba(201,151,58,0.12)" stroke-width="1"/>
+
+        <!-- Comet 1 — outer ring, gold. Arc tail from ~40° behind head, head at top (190,5) -->
+        <g class="comet-g1">
+          <path d="M 71.1 48.3 A 185 185 0 0 1 190 5" fill="none" stroke="#c9973a" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+          <path d="M 71.1 48.3 A 185 185 0 0 1 190 5" fill="none" stroke="#c9973a" stroke-width="3" stroke-linecap="round" filter="url(#glow-gold)" opacity="0.6"/>
+          <circle cx="190" cy="5" r="4" fill="#e8b96a" filter="url(#glow-gold)"/>
+        </g>
+
+        <!-- Comet 2 — mid ring, teal. Head at (190,45) -->
+        <g class="comet-g2">
+          <path d="M 96.8 78.9 A 145 145 0 0 1 190 45" fill="none" stroke="#4ab5c4" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+          <path d="M 96.8 78.9 A 145 145 0 0 1 190 45" fill="none" stroke="#4ab5c4" stroke-width="3" stroke-linecap="round" filter="url(#glow-teal)" opacity="0.6"/>
+          <circle cx="190" cy="45" r="3.5" fill="#4ab5c4" filter="url(#glow-teal)"/>
+        </g>
+
+        <!-- Comet 3 — inner ring, gold. Head at (190,85) -->
+        <g class="comet-g3">
+          <path d="M 122.5 109.6 A 105 105 0 0 1 190 85" fill="none" stroke="#c9973a" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+          <path d="M 122.5 109.6 A 105 105 0 0 1 190 85" fill="none" stroke="#c9973a" stroke-width="2.5" stroke-linecap="round" filter="url(#glow-gold)" opacity="0.55"/>
+          <circle cx="190" cy="85" r="3" fill="#c9973a" filter="url(#glow-gold)"/>
+        </g>
+      </svg>
+
+      <!-- Single orbit wrapper — all 4 nodes clockwise, always 90° apart -->
+      <div class="orbit-single">
+        <div class="diagram-node dn-0"><div class="node-inner">🧬<div class="node-label">DNA<br>Design</div></div></div>
+        <div class="diagram-node dn-1"><div class="node-inner">⚙️<div class="node-label">Engineering<br>Principles</div></div></div>
+        <div class="diagram-node dn-2"><div class="node-inner">🐟<div class="node-label">CET<br>Model</div></div></div>
+        <div class="diagram-node dn-3"><div class="node-inner">🦉<div class="node-label">Case<br>Studies</div></div></div>
+      </div>
+
       <div class="diagram-center">
         <div class="diagram-center-label">Framework</div>
         <div class="diagram-center-main">TOBD</div>
       </div>
-      <div class="diagram-node node-top">🧬<div class="node-label">DNA<br>Design</div></div>
-      <div class="diagram-node node-right">⚙️<div class="node-label">Engineering<br>Principles</div></div>
-      <div class="diagram-node node-bottom">🐟<div class="node-label">CET<br>Model</div></div>
-      <div class="diagram-node node-left">🦉<div class="node-label">Case<br>Studies</div></div>
     </div>
   </div>
 </section>
