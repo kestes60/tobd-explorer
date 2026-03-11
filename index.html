@@ -166,6 +166,12 @@
   .ai-response { background: rgba(10,14,26,0.6); border-left: 2px solid var(--teal); padding: 1rem 1.2rem; font-size: 0.88rem; line-height: 1.75; color: rgba(244,240,232,0.85); display: none; }
   .ai-response.visible { display: block; }
   .ai-response.loading { color: var(--muted); font-style: italic; }
+  .ai-response p { margin-bottom: 0.75rem; }
+  .ai-response p:last-child { margin-bottom: 0; }
+  .ai-response strong { color: var(--paper); font-weight: 600; }
+  .ai-response em { color: var(--teal-light); font-style: italic; }
+  .ai-response ul { margin: 0.5rem 0 0.75rem 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .ai-response li { line-height: 1.65; }
 
   /* Case studies — flex-column for bottom-aligned tag */
   .case-studies { padding: 4rem 3rem; }
@@ -548,6 +554,32 @@ function selectReversal(idx) {
 let pdfBase64 = null;
 let pdfName = null;
 
+function renderMarkdown(text) {
+  return text
+    // Escape HTML entities first
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    // Bold **text**
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    // Italic *text* (single asterisk, not inside words)
+    .replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>')
+    // Bullet lines: lines starting with * or - or •
+    .replace(/^[\*\-•]\s+(.+)$/gm, '<li>$1</li>')
+    // Numbered lines: "1. text"
+    .replace(/^\d+\.\s+(.+)$/gm, '<li>$1</li>')
+    // Wrap consecutive <li> blocks in <ul>
+    .replace(/(<li>.*<\/li>\n?)+/g, m => `<ul>${m}</ul>`)
+    // Paragraph breaks (double newline)
+    .replace(/\n{2,}/g, '</p><p>')
+    // Single newlines inside paragraphs
+    .replace(/\n/g, '<br>')
+    // Wrap in opening paragraph
+    .replace(/^/, '<p>').replace(/$/, '</p>')
+    // Clean up empty paragraphs around lists
+    .replace(/<p>\s*<\/p>/g, '')
+    .replace(/<p>(<ul>)/g, '$1')
+    .replace(/(<\/ul>)<\/p>/g, '$1');
+}
+
 function handlePDFSelect(input) {
   const file = input.files[0];
   const label = document.getElementById('ai-pdf-label');
@@ -622,7 +654,7 @@ async function askAI() {
     const data = await res.json();
     const text = data.content?.filter(b => b.type === 'text').map(b => b.text).join('\n') || 'No response received.';
     responseEl.className = 'ai-response visible';
-    responseEl.textContent = text;
+    responseEl.innerHTML = renderMarkdown(text);
     questionsLeft--;
     input.value = '';
     updateQuotaDisplay();
