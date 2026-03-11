@@ -38,6 +38,16 @@ python3 -m http.server 8000
 npx serve .
 ```
 
+## API Proxy Rule
+The askAI function in index.html must always call the Cloudflare Worker proxy:
+  https://tobd-api-proxy.kestes60.workers.dev/
+
+It must NEVER call https://api.anthropic.com/v1/messages directly.
+Browser requests to api.anthropic.com are blocked by CORS policy.
+
+Before committing any changes to index.html, verify the fetch URL
+in askAI is pointing to the Cloudflare Worker URL above.
+
 ## Deployment
 
 Target: GitHub Pages from `main` branch root. The HTML file should be named `index.html`. Repo: `kestes60/tobd-explorer`.

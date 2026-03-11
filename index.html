@@ -544,7 +544,7 @@ async function askAI() {
   responseEl.textContent = 'Thinking…';
   document.getElementById('ai-send').disabled = true;
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('https://tobd-api-proxy.kestes60.workers.dev/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
