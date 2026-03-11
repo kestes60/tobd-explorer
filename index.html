@@ -140,15 +140,29 @@
   .ai-quota { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted); }
   .ai-quota.exhausted { color: var(--wrong-text); }
 
-  .ai-area { grid-column: 1 / -1; display: none; flex-direction: column; gap: 0.8rem; margin-top: 0.5rem; border-top: 1px solid rgba(42,127,138,0.2); padding-top: 1.5rem; }
+  .ai-area { grid-column: 1 / -1; display: none; flex-direction: column; gap: 1rem; margin-top: 0.5rem; border-top: 1px solid rgba(42,127,138,0.2); padding-top: 1.5rem; }
   .ai-area.open { display: flex; }
-  .ai-input-row { display: flex; gap: 0.8rem; }
+  .ai-area-header { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal-light); display: flex; align-items: center; gap: 0.6rem; }
+  .ai-area-header::before { content: '✦'; color: var(--gold); }
+  .ai-source-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .ai-source-row { display: flex; gap: 0.8rem; align-items: flex-start; }
+  .ai-url-wrap { flex: 1; display: flex; flex-direction: column; gap: 0.35rem; }
+  .ai-url-input { width: 100%; background: rgba(26,48,96,0.3); border: 1px solid rgba(42,127,138,0.2); color: var(--paper); padding: 0.65rem 1rem; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.82rem; outline: none; transition: border-color 0.2s; }
+  .ai-url-input:focus { border-color: rgba(42,127,138,0.6); }
+  .ai-url-input::placeholder { color: rgba(107,117,144,0.7); }
+  .ai-url-hint { font-size: 0.72rem; color: rgba(107,117,144,0.75); font-style: italic; padding-left: 0.2rem; }
+  .ai-pdf-label { display: flex; align-items: center; gap: 0.4rem; background: transparent; border: 1px solid rgba(42,127,138,0.25); color: var(--muted); padding: 0.65rem 1rem; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.06em; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .ai-pdf-label:hover { border-color: rgba(42,127,138,0.5); color: var(--paper); }
+  .ai-pdf-label.has-file { border-color: var(--teal); color: var(--teal-light); }
+  .ai-input-row { display: flex; gap: 0.8rem; align-items: center; }
   .ai-input { flex: 1; background: rgba(26,48,96,0.4); border: 1px solid rgba(42,127,138,0.3); color: var(--paper); padding: 0.75rem 1rem; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.88rem; outline: none; transition: border-color 0.2s; }
   .ai-input:focus { border-color: var(--teal-light); }
   .ai-input::placeholder { color: var(--muted); }
   .ai-send { background: var(--teal); color: var(--paper); border: none; padding: 0.75rem 1.4rem; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
   .ai-send:hover:not(:disabled) { background: var(--teal-light); color: var(--ink); }
   .ai-send:disabled { opacity: 0.4; cursor: default; }
+  .ai-quota { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted); white-space: nowrap; }
+  .ai-quota.exhausted { color: var(--wrong-text); }
   .ai-response { background: rgba(10,14,26,0.6); border-left: 2px solid var(--teal); padding: 1rem 1.2rem; font-size: 0.88rem; line-height: 1.75; color: rgba(244,240,232,0.85); display: none; }
   .ai-response.visible { display: block; }
   .ai-response.loading { color: var(--muted); font-style: italic; }
@@ -361,12 +375,22 @@
   </div>
   <div class="ask-row">
     <button class="ask-btn" id="ask-toggle-btn" onclick="toggleAI()">✦ &nbsp; Ask a question about this concept</button>
-    <span class="ai-quota" id="ai-quota"></span>
   </div>
   <div class="ai-area" id="ai-area">
+    <div class="ai-area-header">Ask a question about this concept</div>
+    <div class="ai-source-label">Optional: Add a source for context</div>
+    <div class="ai-source-row">
+      <div class="ai-url-wrap">
+        <input class="ai-url-input" id="ai-url" type="url" placeholder="🔗 Paste a URL (paper, article...)" />
+        <div class="ai-url-hint">Paste any research paper URL and I'll read it before answering.</div>
+      </div>
+      <label class="ai-pdf-label" id="ai-pdf-label" for="ai-pdf-input">📎 Upload PDF</label>
+      <input type="file" id="ai-pdf-input" accept=".pdf" style="display:none" onchange="handlePDFSelect(this)" />
+    </div>
     <div class="ai-input-row">
       <input class="ai-input" id="ai-input" type="text" placeholder="E.g. What does this mean for how we study cavefish?" />
       <button class="ai-send" id="ai-send" onclick="askAI()">Ask →</button>
+      <span class="ai-quota" id="ai-quota"></span>
     </div>
     <div class="ai-response" id="ai-response"></div>
   </div>
@@ -509,20 +533,41 @@ function selectReversal(idx) {
     const h = Math.max(pw.scrollHeight, pr.scrollHeight);
     pw.style.minHeight = h + 'px'; pr.style.minHeight = h + 'px';
   });
-  // Reset AI
+  // Reset AI area
   document.getElementById('ai-response').className = 'ai-response';
   document.getElementById('ai-response').textContent = '';
   document.getElementById('ai-input').value = '';
+  document.getElementById('ai-url').value = '';
+  document.getElementById('ai-pdf-input').value = '';
+  document.getElementById('ai-pdf-label').textContent = '📎 Upload PDF';
+  document.getElementById('ai-pdf-label').classList.remove('has-file');
+  pdfBase64 = null; pdfName = null;
   document.getElementById('detail-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+let pdfBase64 = null;
+let pdfName = null;
+
+function handlePDFSelect(input) {
+  const file = input.files[0];
+  const label = document.getElementById('ai-pdf-label');
+  if (!file) { pdfBase64 = null; pdfName = null; label.textContent = '📎 Upload PDF'; label.classList.remove('has-file'); return; }
+  pdfName = file.name;
+  label.textContent = `📎 ${file.name.length > 18 ? file.name.slice(0,15)+'…' : file.name}`;
+  label.classList.add('has-file');
+  const reader = new FileReader();
+  reader.onload = e => { pdfBase64 = e.target.result.split(',')[1]; };
+  reader.readAsDataURL(file);
 }
 
 function updateQuotaDisplay() {
   const el = document.getElementById('ai-quota');
-  el.textContent = questionsLeft > 0 ? `${questionsLeft} question${questionsLeft !== 1 ? 's' : ''} remaining this session` : 'Session limit reached';
+  el.textContent = questionsLeft > 0 ? `${questionsLeft} question${questionsLeft !== 1 ? 's' : ''} remaining` : 'Session limit reached';
   el.className = 'ai-quota' + (questionsLeft === 0 ? ' exhausted' : '');
   const exhausted = questionsLeft === 0;
   document.getElementById('ai-send').disabled = exhausted;
   document.getElementById('ai-input').disabled = exhausted;
+  document.getElementById('ai-url').disabled = exhausted;
   if (exhausted) document.getElementById('ask-toggle-btn').disabled = true;
 }
 
@@ -537,25 +582,47 @@ async function askAI() {
   const input = document.getElementById('ai-input');
   const question = input.value.trim();
   if (!question) return;
+  const url = document.getElementById('ai-url').value.trim();
   const r = reversals[activeIdx];
   const context = `Reversal: "${r.title}". Engineering view: "${r.rightH}" — ${r.rightB}`;
   const responseEl = document.getElementById('ai-response');
   responseEl.className = 'ai-response visible loading';
-  responseEl.textContent = 'Thinking…';
+  responseEl.textContent = url ? 'Fetching source and thinking…' : pdfBase64 ? 'Reading PDF and thinking…' : 'Thinking…';
   document.getElementById('ai-send').disabled = true;
+
+  // Build message content
+  let userContent;
+  if (pdfBase64) {
+    userContent = [
+      { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: pdfBase64 } },
+      { type: 'text', text: `TOBD Context: ${context}\n\nThe user has uploaded a PDF (${pdfName || 'document'}). Please read it and answer this question: ${question}` }
+    ];
+  } else if (url) {
+    userContent = `TOBD Context: ${context}\n\nThe user has provided this URL for context: ${url}\n\nPlease use your web search capability to retrieve and read this source, then answer: ${question}`;
+  } else {
+    userContent = `Context: ${context}\n\nQuestion: ${question}`;
+  }
+
+  // Build request body
+  const body = {
+    model: 'claude-sonnet-4-20250514', max_tokens: 1000,
+    system: `You are a knowledgeable guide for the Institute for Creation Research's Theory of Biological Design (TOBD), developed by Dr. Randy Guliuzza. Answer questions clearly, confidently, and accessibly. You are not adversarial toward evolutionists — you present the engineering-based creation science view with clarity and respect. Keep answers to 3-5 sentences unless more depth is genuinely needed. Always connect the answer back to the specific reversal concept being discussed.`,
+    messages: [{ role: 'user', content: userContent }]
+  };
+  if (url && !pdfBase64) {
+    body.tools = [{ type: 'web_search_20250305', name: 'web_search' }];
+  }
+
   try {
     const res = await fetch('https://tobd-api-proxy.kestes60.workers.dev/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514', max_tokens: 1000,
-        system: `You are a knowledgeable guide for the Institute for Creation Research's Theory of Biological Design (TOBD), developed by Dr. Randy Guliuzza. Answer questions clearly, confidently, and accessibly. You are not adversarial toward evolutionists — you present the engineering-based creation science view with clarity and respect. Keep answers to 3-5 sentences unless more depth is genuinely needed. Always connect the answer back to the specific reversal concept being discussed.`,
-        messages: [{ role: 'user', content: `Context: ${context}\n\nQuestion: ${question}` }]
-      })
+      body: JSON.stringify(body)
     });
     const data = await res.json();
+    const text = data.content?.filter(b => b.type === 'text').map(b => b.text).join('\n') || 'No response received.';
     responseEl.className = 'ai-response visible';
-    responseEl.textContent = data.content?.[0]?.text || 'No response received.';
+    responseEl.textContent = text;
     questionsLeft--;
     input.value = '';
     updateQuotaDisplay();
