@@ -250,24 +250,24 @@
 <nav>
   <div class="nav-logo">ICR · Theory of Biological Design</div>
   <ul class="nav-links">
-    <li><a href="#">Framework</a></li>
-    <li><a href="#">Reversals</a></li>
-    <li><a href="#">Case Studies</a></li>
-    <li><a href="#">Research</a></li>
-    <li><a href="#">About CET</a></li>
+    <li><a href="#section-framework" onclick="smoothTo('section-framework')">Framework</a></li>
+    <li><a href="#section-reversals" onclick="smoothTo('section-reversals')">Reversals</a></li>
+    <li><a href="#section-cases" onclick="smoothTo('section-cases')">Case Studies</a></li>
+    <li><a href="https://www.icr.org/research" target="_blank" rel="noopener">Research ↗</a></li>
+    <li><a href="https://www.icr.org/content/continuous-environmental-tracking-engineering-based-model-adaptation" target="_blank" rel="noopener">About CET ↗</a></li>
   </ul>
-  <a href="https://icr.org" class="nav-cta">ICR.org ↗</a>
+  <a href="https://icr.org" class="nav-cta" target="_blank" rel="noopener">ICR.org ↗</a>
 </nav>
 
-<section class="hero">
+<section class="hero" id="section-framework">
   <div class="hero-grid-overlay"></div>
   <div class="hero-left">
     <div class="hero-eyebrow">Institute for Creation Research</div>
     <h1 class="hero-title">Biology Through<br>an <em>Engineer's</em><br>Lens</h1>
     <p class="hero-subtitle">The Theory of Biological Design proposes that organisms are not passively shaped by their environment — they are <strong>intelligently engineered</strong> to actively track and respond to it. Explore the framework that is changing how creation scientists interpret life.</p>
     <div class="hero-buttons">
-      <button class="btn-primary" onclick="document.querySelector('.section-header').scrollIntoView({behavior:'smooth'})">Explore the Framework</button>
-      <button class="btn-ghost">Watch: Dr. Guliuzza ↗</button>
+      <button class="btn-primary" onclick="smoothTo('section-reversals')">Explore the Framework</button>
+      <a href="https://www.icr.org/meet-dr-g/" target="_blank" rel="noopener" class="btn-ghost">Meet Dr. Guliuzza ↗</a>
     </div>
   </div>
   <div class="hero-right">
@@ -330,7 +330,7 @@
 
 <hr class="section-divider">
 
-<div class="section-header">
+<div class="section-header" id="section-reversals">
   <span class="section-label">Core Framework</span>
   <h2 class="section-title">The Paradigm Reversals</h2>
   <div class="section-line"></div>
@@ -372,7 +372,7 @@
   </div>
 </div>
 
-<section class="case-studies">
+<section class="case-studies" id="section-cases">
   <div class="section-header" style="padding: 0 0 2rem;">
     <span class="section-label">Real-World Evidence</span>
     <h2 class="section-title">Case Studies in Engineered Biology</h2>
@@ -415,6 +415,11 @@
 </footer>
 
 <script>
+function smoothTo(id) {
+  const el = document.getElementById(id);
+  if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+}
+
 const reversals = [
   { num:'01', title:'Life & Operations', desc:'Does life emerge from biology, or does life enable biology?',
     wrongH:'"Life emerges FROM biological operations"',
@@ -539,8 +544,9 @@ async function askAI() {
   responseEl.textContent = 'Thinking…';
   document.getElementById('ai-send').disabled = true;
   try {
-    const res = await fetch('https://tobd-api-proxy.kestes60.workers.dev/', {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514', max_tokens: 1000,
         system: `You are a knowledgeable guide for the Institute for Creation Research's Theory of Biological Design (TOBD), developed by Dr. Randy Guliuzza. Answer questions clearly, confidently, and accessibly. You are not adversarial toward evolutionists — you present the engineering-based creation science view with clarity and respect. Keep answers to 3-5 sentences unless more depth is genuinely needed. Always connect the answer back to the specific reversal concept being discussed.`,
