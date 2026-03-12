@@ -173,6 +173,12 @@ function formatDate(raw) {
 async function processTOBD(item, env) {
   const prompt = `You are analyzing a science news article through the TOBD (Theory of Biological Design) lens developed by Dr. Randy Guliuzza of the Institute for Creation Research.
 
+STEP 1: Determine if this article is biologically relevant — meaning it deals with biology, genetics, biochemistry, living organisms, ecology, or life sciences. Articles about astronomy, physics, geology, cosmology, climate, technology, or other non-biological topics are NOT relevant.
+
+If the article is NOT biologically relevant, return ONLY: {"skip": true}
+
+STEP 2: If the article IS biologically relevant, analyze it through the TOBD lens.
+
 TOBD Reversals for reference:
 ${REVERSALS}
 
@@ -208,6 +214,11 @@ Return ONLY a JSON object with these exact fields, no other text:
     const text = data.content?.[0]?.text || '';
     const clean = text.replace(/```json|```/g, '').trim();
     const parsed = JSON.parse(clean);
+
+    if (parsed.skip) {
+      console.log(`Skipped non-biological article: "${item.headline}"`);
+      return null;
+    }
 
     return {
       id: hashStr(item.link),
