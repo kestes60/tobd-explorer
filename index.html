@@ -173,6 +173,71 @@
   .ai-response ul { margin: 0.5rem 0 0.75rem 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; }
   .ai-response li { line-height: 1.65; }
 
+  /* ── Newsfeed ─────────────────────────────────────────────── */
+  .newsfeed { padding: 5rem 3rem; border-top: 1px solid rgba(201,151,58,0.1); }
+  .newsfeed-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+  .newsfeed-meta { max-width: 480px; }
+  .newsfeed-meta .section-label { display: block; margin-bottom: 0.5rem; }
+  .newsfeed-intro { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-top: 0.5rem; }
+  .newsfeed-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .filter-btn { background: transparent; border: 1px solid rgba(201,151,58,0.2); color: var(--muted); padding: 0.4rem 1rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+  .filter-btn:hover { border-color: var(--gold); color: var(--paper); }
+  .filter-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(201,151,58,0.06); }
+
+  .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .news-card { border: 1px solid rgba(201,151,58,0.12); display: flex; flex-direction: column; transition: border-color 0.2s; position: relative; overflow: hidden; }
+  .news-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; transition: opacity 0.2s; opacity: 0; }
+  .news-card.secular { border-color: rgba(201,151,58,0.15); }
+  .news-card.secular::before { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+  .news-card.creation { border-color: rgba(42,127,138,0.2); }
+  .news-card.creation::before { background: linear-gradient(90deg, var(--teal), var(--teal-light)); }
+  .news-card:hover::before { opacity: 1; }
+  .news-card:hover { border-color: rgba(201,151,58,0.3); }
+  .news-card.creation:hover { border-color: rgba(42,127,138,0.45); }
+
+  .news-card-top { padding: 1.4rem 1.4rem 0; }
+  .news-source-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
+  .news-source { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; display: flex; align-items: center; gap: 0.4rem; }
+  .news-card.secular .news-source { color: var(--gold); }
+  .news-card.creation .news-source { color: var(--teal-light); }
+  .news-date { font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; letter-spacing: 0.08em; color: rgba(107,117,144,0.6); }
+  .news-headline { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; line-height: 1.4; color: var(--paper); margin-bottom: 1rem; }
+
+  .news-divider { border: none; border-top: 1px solid rgba(201,151,58,0.1); margin: 0 1.4rem; }
+  .news-card.creation .news-divider { border-color: rgba(42,127,138,0.15); }
+
+  .news-tobd { padding: 1rem 1.4rem; flex: 1; }
+  .news-tobd-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.6rem; }
+  .news-reversal-tag { background: rgba(201,151,58,0.1); border: 1px solid rgba(201,151,58,0.2); padding: 0.15rem 0.5rem; font-size: 0.55rem; letter-spacing: 0.1em; }
+  .news-tobd-text { font-size: 0.82rem; line-height: 1.65; color: rgba(244,240,232,0.72); }
+
+  .news-card-footer { padding: 0.9rem 1.4rem; border-top: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap; }
+  .news-read-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .news-read-link:hover { color: var(--paper); }
+  .news-share-btns { display: flex; gap: 0.35rem; }
+  .share-btn { background: transparent; border: 1px solid rgba(255,255,255,0.08); color: rgba(107,117,144,0.8); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; cursor: pointer; transition: all 0.2s; font-family: 'IBM Plex Sans', sans-serif; text-decoration: none; }
+  .share-btn:hover { border-color: rgba(201,151,58,0.4); color: var(--gold); }
+  .share-btn.copy-btn.copied { border-color: var(--teal); color: var(--teal-light); }
+
+  .newsfeed-load-more { text-align: center; margin-top: 2.5rem; }
+  .load-more-btn { background: transparent; border: 1px solid rgba(201,151,58,0.2); color: var(--muted); padding: 0.7rem 2.5rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+  .load-more-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .load-more-btn:disabled { opacity: 0.35; cursor: default; }
+
+  .newsfeed-credit { margin-top: 3rem; padding: 2rem; border: 1px solid rgba(42,127,138,0.15); background: rgba(42,127,138,0.04); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+  .credit-text { font-size: 0.82rem; line-height: 1.7; color: var(--muted); max-width: 520px; }
+  .credit-text strong { color: var(--paper); font-weight: 500; }
+  .credit-links { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  .credit-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 0.5rem 1.1rem; border: 1px solid; transition: all 0.2s; }
+  .credit-link.visit { color: var(--teal-light); border-color: rgba(42,127,138,0.4); }
+  .credit-link.visit:hover { background: rgba(42,127,138,0.1); }
+  .credit-link.donate { color: var(--gold); border-color: rgba(201,151,58,0.4); }
+  .credit-link.donate:hover { background: rgba(201,151,58,0.08); }
+
+  .news-loading { text-align: center; padding: 4rem 0; color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; }
+
+  /* ── End Newsfeed ─────────────────────────────────────────────── */
+
   /* Case studies — flex-column for bottom-aligned tag */
   .case-studies { padding: 4rem 3rem; }
   .case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
@@ -246,6 +311,10 @@
     /* AI area */
     .ai-input-row { flex-direction: column; }
     .ai-send { width: 100%; }
+
+    /* Newsfeed: single column on mobile */
+    .newsfeed { padding: 2.5rem 1.5rem; }
+    .news-grid { grid-template-columns: 1fr; }
 
     /* Case studies: single column */
     .case-studies { padding: 2.5rem 1.5rem; }
@@ -429,6 +498,44 @@
       <div class="case-title">Embryonic Clocks</div>
       <div class="case-body">Embryos operate with internal timing systems that mirror human construction schedules — with logic-based controllers, sensors, and pre-programmed decision trees. Not random. Engineered.</div>
       <span class="case-tag">TOBD Research</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NEWSFEED SECTION
+═══════════════════════════════════════════════════════════════ -->
+<section class="newsfeed" id="section-newsfeed">
+  <div class="newsfeed-header">
+    <div class="newsfeed-meta">
+      <span class="section-label">Science in the News</span>
+      <h2 class="section-title" style="margin-bottom:0.3rem;">Through the <em style="font-style:normal;color:var(--gold)">TOBD Lens</em></h2>
+      <p class="newsfeed-intro">Secular science headlines and creation science research — viewed through the framework of Continuous Environmental Tracking and Biological Design.</p>
+    </div>
+    <div class="newsfeed-filters">
+      <button class="filter-btn active" onclick="filterFeed('all', this)">All</button>
+      <button class="filter-btn" onclick="filterFeed('secular', this)">🌐 Secular</button>
+      <button class="filter-btn" onclick="filterFeed('creation', this)">✝ Creation Science</button>
+    </div>
+  </div>
+
+  <div class="news-grid" id="news-grid">
+    <div class="news-loading">Loading latest science news…</div>
+  </div>
+
+  <div class="newsfeed-load-more">
+    <button class="load-more-btn" id="load-more-btn" onclick="loadMoreNews()" style="display:none">Load more ↓</button>
+  </div>
+
+  <div class="newsfeed-credit">
+    <div class="credit-text">
+      The TOBD framework and creation science research featured here is the work of
+      <strong>the Institute for Creation Research</strong> and its scientists.
+      All creation science content links directly to its original source.
+    </div>
+    <div class="credit-links">
+      <a class="credit-link visit" href="https://icr.org" target="_blank" rel="noopener">Visit ICR.org ↗</a>
+      <a class="credit-link donate" href="https://www.icr.org/donate" target="_blank" rel="noopener">Support ICR's Research ↗</a>
     </div>
   </div>
 </section>
@@ -665,10 +772,158 @@ async function askAI() {
   }
 }
 
+// ═══════════════════════════════════════════════════════════════
+// NEWSFEED
+// ═══════════════════════════════════════════════════════════════
+
+const EXPLORER_URL = 'https://kestes60.github.io/tobd-explorer';
+
+const MOCK_FEED = [
+  { id:1, type:'secular', source:'Nature', date:'Mar 9, 2026',
+    headline:'Fish evolve complete eye loss in just three generations of cave darkness',
+    tobd:'The organism\'s internal CET system responded to darkness — the cave did nothing. This is Reversal #3 in real time: the organism is the agent, not the environment. Engineering drove the response.',
+    reversal:'Reversal #3', reversalTitle:'Adaptation & Environment',
+    link:'https://www.nature.com', shareText:'Nature: "Fish evolve eye loss in 3 generations"\n\nBut the cave did nothing.\nThe organism\'s own system made the call.\n\nThis is what the Theory of Biological Design predicts.' },
+  { id:2, type:'secular', source:'Science Daily', date:'Mar 8, 2026',
+    headline:'Bacteria develop full antibiotic resistance within hours of exposure',
+    tobd:'Innate resistance mechanisms activated on demand — not random mutation selected over generations. This is engineering logic, not chance. Reversal #4: causation flows from designed internal systems, not external pressure.',
+    reversal:'Reversal #4', reversalTitle:'Causation & Design',
+    link:'https://www.sciencedaily.com', shareText:'Science Daily: "Bacteria develop antibiotic resistance within hours"\n\nNot random mutation. Innate systems activated on demand.\n\nThis is what the Theory of Biological Design predicts.' },
+  { id:3, type:'creation', source:'ICR.org', date:'Mar 7, 2026',
+    headline:'New CET research confirms organism-driven adaptation in desert lizards',
+    tobd:'Dr. Guliuzza\'s Continuous Environmental Tracking model predicts exactly this finding. The lizard tracked, sensed, and responded — the desert did nothing. Reversal #2: agency is innate to the organism.',
+    reversal:'Reversal #2', reversalTitle:'Agency & Purpose',
+    link:'https://www.icr.org', shareText:'ICR: "New CET research confirms organism-driven adaptation"\n\nThe organism tracked, sensed, and responded. The desert did nothing.\n\nThis is the Theory of Biological Design in action.' },
+  { id:4, type:'creation', source:'Acts & Facts', date:'Mar 6, 2026',
+    headline:'Engineered embryonic clocks: pre-programmed timing systems in human development',
+    tobd:'Embryos operate on logic-based internal schedules that mirror engineered construction timelines — sensors, controllers, decision trees. Reversal #1: life is what enables purposeful biology, not the other way around.',
+    reversal:'Reversal #1', reversalTitle:'Life & Operations',
+    link:'https://www.icr.org/actsfacts', shareText:'Acts & Facts: "Engineered embryonic clocks in human development"\n\nSensors. Controllers. Pre-programmed decision trees.\n\nThis is engineering, not chance. Theory of Biological Design.' },
+  { id:5, type:'secular', source:'Nature', date:'Mar 5, 2026',
+    headline:'Convergent evolution of sonar in bats and dolphins reveals identical gene sequences',
+    tobd:'Identical engineering solutions appearing independently in unrelated lineages is a signature of Common Design — not common ancestry. Reversal #6: similar features point to one Designer, not one ancestor.',
+    reversal:'Reversal #6', reversalTitle:'Common Design',
+    link:'https://www.nature.com', shareText:'Nature: "Convergent evolution produces identical genes in bats and dolphins"\n\nIdentical engineering solutions — designed, not coincidental.\n\nReversal #6 of the Theory of Biological Design.' },
+  { id:6, type:'creation', source:'ARJ', date:'Mar 1, 2026',
+    headline:'Baraminology study reveals designed discontinuities across vertebrate families',
+    tobd:'Created kinds show engineered boundaries — not the blurry continuum evolutionary theory predicts. The discontinuities are features of design, not gaps in a fossil record. Reversal #5: internal systems, not external history, define life.',
+    reversal:'Reversal #5', reversalTitle:'Externalism vs. Internalism',
+    link:'https://answersresearchjournal.org', shareText:'ARJ: "Baraminology study reveals designed discontinuities across vertebrate families"\n\nEngineered boundaries, not evolutionary blur.\n\nThe Theory of Biological Design predicts this.' },
+  { id:7, type:'secular', source:'Science Daily', date:'Feb 28, 2026',
+    headline:'Octopus genome reveals 33,000 genes — more than humans — with radical tissue-specific expression',
+    tobd:'Complexity at this scale — tissue-specific expression across a radically different body plan — is the hallmark of advanced engineering, not incremental random mutation. Reversal #4: designed causation explains what selection cannot.',
+    reversal:'Reversal #4', reversalTitle:'Causation & Design',
+    link:'https://www.sciencedaily.com', shareText:'Science Daily: "Octopus genome reveals more genes than humans"\n\nTissue-specific complexity at this scale is an engineering signature.\n\nTheory of Biological Design.' },
+  { id:8, type:'creation', source:'ICR.org', date:'Feb 25, 2026',
+    headline:'Dr. Guliuzza: The five engineering principles that define CET',
+    tobd:'A clear technical summary of CET\'s core claims: organisms possess sensors, processors, effectors, and feedback loops that actively track and respond to environments. This is systems biology, and it points to a systems Engineer.',
+    reversal:'Reversal #3', reversalTitle:'Adaptation & Environment',
+    link:'https://www.icr.org', shareText:'ICR: "The five engineering principles that define CET"\n\nSensors. Processors. Effectors. Feedback loops.\n\nOrganisms are engineered tracking systems. Theory of Biological Design.' },
+];
+
+const PAGE_SIZE_FEED = 6;
+let feedFilter = 'all';
+let feedPage = 1;
+let allFeedItems = [...MOCK_FEED];
+
+function buildShareURL(platform, item) {
+  const text = `${item.shareText}\n\n🔬 ${EXPLORER_URL}\n\n#TOBD #CreationScience #Biology`;
+  const encodedText = encodeURIComponent(text);
+  const encodedURL = encodeURIComponent(EXPLORER_URL);
+  if (platform === 'x') return `https://twitter.com/intent/tweet?text=${encodedText}`;
+  if (platform === 'linkedin') return `https://www.linkedin.com/sharing/share-offsite/?url=${encodedURL}&summary=${encodeURIComponent(item.shareText)}`;
+  if (platform === 'facebook') return `https://www.facebook.com/sharer/sharer.php?u=${encodedURL}`;
+  return null;
+}
+
+function copyLink(btn) {
+  navigator.clipboard.writeText(EXPLORER_URL).then(() => {
+    btn.textContent = '✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '🔗'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function buildNewsCard(item) {
+  const card = document.createElement('div');
+  card.className = `news-card ${item.type}`;
+  card.dataset.type = item.type;
+
+  const xURL = buildShareURL('x', item);
+  const liURL = buildShareURL('linkedin', item);
+  const fbURL = buildShareURL('facebook', item);
+  const sourceIcon = item.type === 'secular' ? '🌐' : '✝';
+
+  card.innerHTML = `
+    <div class="news-card-top">
+      <div class="news-source-row">
+        <span class="news-source">${sourceIcon} ${item.source}</span>
+        <span class="news-date">${item.date}</span>
+      </div>
+      <div class="news-headline">"${item.headline}"</div>
+    </div>
+    <hr class="news-divider">
+    <div class="news-tobd">
+      <div class="news-tobd-label">✦ TOBD Lens <span class="news-reversal-tag">${item.reversal}</span></div>
+      <div class="news-tobd-text">${item.tobd}</div>
+    </div>
+    <div class="news-card-footer">
+      <a class="news-read-link" href="${item.link}" target="_blank" rel="noopener">Read source ↗</a>
+      <div class="news-share-btns">
+        <a class="share-btn" href="${xURL}" target="_blank" rel="noopener" title="Share on X">𝕏</a>
+        <a class="share-btn" href="${liURL}" target="_blank" rel="noopener" title="Share on LinkedIn">in</a>
+        <a class="share-btn" href="${fbURL}" target="_blank" rel="noopener" title="Share on Facebook">f</a>
+        <button class="share-btn copy-btn" onclick="copyLink(this)" title="Copy link">🔗</button>
+      </div>
+    </div>`;
+  return card;
+}
+
+function renderFeed() {
+  const grid = document.getElementById('news-grid');
+  const filtered = feedFilter === 'all' ? allFeedItems : allFeedItems.filter(i => i.type === feedFilter);
+  const visible = filtered.slice(0, feedPage * PAGE_SIZE_FEED);
+  grid.innerHTML = '';
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="news-loading">No items found.</div>';
+  } else {
+    visible.forEach(item => grid.appendChild(buildNewsCard(item)));
+  }
+  const btn = document.getElementById('load-more-btn');
+  if (visible.length < filtered.length) {
+    btn.style.display = 'inline-block';
+    btn.disabled = false;
+  } else {
+    btn.style.display = 'none';
+  }
+}
+
+function filterFeed(type, el) {
+  feedFilter = type;
+  feedPage = 1;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderFeed();
+}
+
+function loadMoreNews() {
+  feedPage++;
+  renderFeed();
+}
+
+async function loadFeedFromWorker() {
+  try {
+    const res = await fetch('https://tobd-newsfeed.kestes60.workers.dev/newsfeed');
+    allFeedItems = await res.json();
+  } catch(e) { console.error('Feed load failed', e); }
+  renderFeed();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('ai-input').addEventListener('keydown', e => { if (e.key === 'Enter') askAI(); });
   renderCards();
   selectReversal(0);
+  loadFeedFromWorker();
 });
 </script>
 </body>
