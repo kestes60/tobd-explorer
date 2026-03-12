@@ -51,3 +51,9 @@ in askAI is pointing to the Cloudflare Worker URL above.
 ## Deployment
 
 Target: GitHub Pages from `main` branch root. The HTML file should be named `index.html`. Repo: `kestes60/tobd-explorer`.
+
+## Post-Push Reminder
+
+After every successful `git push` to GitHub, remind Keith to re-upload the updated files to the Claude.ai TOBD Explorer project. Files to keep current:
+- `index.html`
+- `tobd-newsfeed-worker.js`
