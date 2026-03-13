@@ -192,7 +192,7 @@ Return ONLY a JSON object with these exact fields, no other text:
   "tobd": "2-4 sentence TOBD interpretation of this article. Connect it to the relevant reversal. Be confident, clear, and accessible. Not preachy.",
   "reversal": "Reversal #N",
   "reversalTitle": "Title of the reversal",
-  "shareText": "A punchy X post, max 240 characters (excluding URL). Format exactly: Line 1 = quoted headline in double quotes. Line 2 = one sentence naming the specific Reversal (e.g. 'This is Reversal #3 in action:') and stating what the finding reveals through the TOBD lens — focus on the engineering insight, not just a description of the study. Line 3 = '#TOBD #Biology @ICRscience'. Do not add the URL — it will be appended automatically."
+  "shareText": "A punchy X post. Format exactly as four lines with no extra text:\nLine 1: A paraphrased headline in double quotes — max 60 characters, not the full headline\nLine 2: One sentence starting with 'Reversal #N in action:' then one tight clause stating the engineering insight — entire line max 120 characters\nLine 3: '#TOBD #Biology @ICRscience'\nDo not add the URL. Do not exceed these limits."
 }`;
 
   try {
