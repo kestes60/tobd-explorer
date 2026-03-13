@@ -915,8 +915,15 @@ function loadMoreNews() {
 async function loadFeedFromWorker() {
   try {
     const res = await fetch('https://tobd-newsfeed.kestes60.workers.dev/newsfeed');
-    allFeedItems = await res.json();
-  } catch(e) { console.error('Feed load failed', e); }
+    const data = await res.json();
+    if (Array.isArray(data) && data.length > 0) {
+      allFeedItems = data;
+    }
+    // If empty or invalid, allFeedItems stays as MOCK_FEED
+  } catch(e) {
+    console.error('Feed load failed, using mock data', e);
+    // allFeedItems stays as MOCK_FEED
+  }
   renderFeed();
 }
 
