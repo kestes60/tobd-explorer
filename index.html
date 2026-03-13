@@ -829,14 +829,7 @@ let allFeedItems = [...MOCK_FEED];
 function buildShareURL(platform, item) {
   const encodedURL = encodeURIComponent(EXPLORER_URL);
   if (platform === 'x') {
-    const headline = item.headline.length > 75
-      ? item.headline.slice(0, 72) + '…'
-      : item.headline;
-    const insight = item.tobd.split(/\.\s/)[0].trim();
-    const shortInsight = insight.length > 110
-      ? insight.slice(0, 107) + '…'
-      : insight;
-    const tweet = `"${headline}"\n\n${shortInsight}.\n\n${EXPLORER_URL} #TOBD #Biology`;
+    const tweet = `${item.shareText}\n\n${EXPLORER_URL}`;
     return `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}`;
   }
   if (platform === 'linkedin') return `https://www.linkedin.com/sharing/share-offsite/?url=${encodedURL}&summary=${encodeURIComponent(item.shareText)}`;
