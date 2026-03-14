@@ -837,6 +837,18 @@ function buildShareURL(platform, item) {
   return null;
 }
 
+function shareLinkedIn(e, itemId) {
+  const item = allFeedItems.find(i => i.id === itemId);
+  if (!item) return;
+  const text = item.linkedInText || item.tobd || '';
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = e.currentTarget;
+    btn.textContent = '✓';
+    setTimeout(() => { btn.textContent = 'in'; }, 2000);
+  });
+  window.open(`https://www.linkedin.com/feed/`, '_blank');
+}
+
 function copyLink(btn) {
   navigator.clipboard.writeText(EXPLORER_URL).then(() => {
     btn.textContent = '✓';
@@ -872,7 +884,7 @@ function buildNewsCard(item) {
       <a class="news-read-link" href="${item.link}" target="_blank" rel="noopener">Read source ↗</a>
       <div class="news-share-btns">
         <a class="share-btn" href="${xURL}" target="_blank" rel="noopener" title="Share on X">𝕏</a>
-        <a class="share-btn" href="${liURL}" target="_blank" rel="noopener" title="Share on LinkedIn">in</a>
+        <button class="share-btn" onclick="shareLinkedIn(event, ${item.id})" title="Share on LinkedIn">in</button>
         <a class="share-btn" href="${fbURL}" target="_blank" rel="noopener" title="Share on Facebook">f</a>
         <button class="share-btn copy-btn" onclick="copyLink(this)" title="Copy link">🔗</button>
       </div>
