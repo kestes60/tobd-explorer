@@ -92,11 +92,13 @@ async function runFeedUpdate(env) {
       const items = await fetchRSS(source);
       for (const item of items) {
         if (existingLinks.has(item.link)) continue; // already processed
-        const articleText = await fetchArticleText(item.link);
+        const PAYWALLED = ['nature.com', 'science.org', 'cell.com'];
+        const isPaywalled = PAYWALLED.some(d => item.link.includes(d));
+        const articleText = isPaywalled ? '' : await fetchArticleText(item.link);
         const processed = await processTOBD(item, articleText, env);
         if (processed) newItems.push(processed);
         // Small delay to avoid rate limiting Claude API
-        await sleep(500);
+        await sleep(200);
       }
     } catch (err) {
       console.error(`Failed to fetch ${source.name}:`, err);
@@ -142,7 +144,7 @@ function parseRSS(xml, source) {
       description: desc,
       date: formatDate(pubDate),
     });
-    if (items.length >= 3) break; // max 3 per source per run
+    if (items.length >= 1) break; // max 1 per source per run
   }
   return items;
 }
