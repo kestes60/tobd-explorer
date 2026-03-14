@@ -829,7 +829,7 @@ let allFeedItems = [...MOCK_FEED];
 function buildShareURL(platform, item) {
   const encodedURL = encodeURIComponent(EXPLORER_URL);
   if (platform === 'x') {
-    const tweet = `${item.shareText}\n\n${EXPLORER_URL}`;
+    const tweet = `${item.shareText}\n${item.link}\n\n${EXPLORER_URL}`;
     return `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}`;
   }
   if (platform === 'linkedin') return `https://www.linkedin.com/sharing/share-offsite/?url=${encodedURL}&summary=${encodeURIComponent(item.shareText)}`;
