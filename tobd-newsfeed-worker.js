@@ -92,7 +92,8 @@ async function runFeedUpdate(env) {
       const items = await fetchRSS(source);
       for (const item of items) {
         if (existingLinks.has(item.link)) continue; // already processed
-        const processed = await processTOBD(item, env);
+        const articleText = await fetchArticleText(item.link);
+        const processed = await processTOBD(item, articleText, env);
         if (processed) newItems.push(processed);
         // Small delay to avoid rate limiting Claude API
         await sleep(500);
@@ -169,30 +170,44 @@ function formatDate(raw) {
   } catch { return ''; }
 }
 
+// ─── Article Text Fetcher ─────────────────────────────────────────────────────
+async function fetchArticleText(url) {
+  try {
+    const proxyURL = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+    const res = await fetch(proxyURL, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; TOBDExplorerBot/1.0)' } });
+    if (!res.ok) return '';
+    const html = await res.text();
+    // Strip tags and collapse whitespace, take first 3000 chars
+    return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 3000);
+  } catch {
+    return '';
+  }
+}
+
 // ─── TOBD Lens via Claude API ──────────────────────────────────────────────────
-async function processTOBD(item, env) {
+async function processTOBD(item, articleText, env) {
   const prompt = `You are analyzing a science news article through the TOBD (Theory of Biological Design) lens developed by Dr. Randy Guliuzza of the Institute for Creation Research.
 
-STEP 1: Determine if this article is biologically relevant — meaning it deals with biology, genetics, biochemistry, living organisms, ecology, or life sciences. Articles about astronomy, physics, geology, cosmology, climate, technology, or other non-biological topics are NOT relevant.
+STEP 1: Determine if this article is biologically relevant. If not, return ONLY: {"skip": true}
 
-If the article is NOT biologically relevant, return ONLY: {"skip": true}
+STEP 2: If biologically relevant, analyze through the TOBD lens.
 
-STEP 2: If the article IS biologically relevant, analyze it through the TOBD lens.
-
-TOBD Reversals for reference:
+TOBD Reversals:
 ${REVERSALS}
 
 Article:
 Source: ${item.source} (${item.type === 'secular' ? 'secular science' : 'creation science'})
 Headline: "${item.headline}"
 Summary: ${item.description || '(no summary available)'}
+Full article text: ${articleText || '(not available)'}
 
 Return ONLY a JSON object with these exact fields, no other text:
 {
-  "tobd": "2-4 sentence TOBD interpretation of this article. Connect it to the relevant reversal. Be confident, clear, and accessible. Not preachy.",
+  "tobd": "2-4 sentence TOBD interpretation. Connect to the relevant reversal. Clear and accessible.",
   "reversal": "Reversal #N",
   "reversalTitle": "Title of the reversal",
-  "shareText": "A punchy X post. Format exactly as four lines with no extra text:\nLine 1: A paraphrased headline in double quotes — max 60 characters, not the full headline\nLine 2: One sentence starting with 'Reversal #N in action:' then one tight clause stating the engineering insight — entire line max 120 characters\nLine 3: '#TOBD #Biology @ICRscience'\nDo not add the URL. Do not exceed these limits."
+  "shareText": "X post. Four lines exactly:\nLine 1: Paraphrased headline in double quotes — max 60 characters\nLine 2: 'TOBD Reversal #N in action:' then one tight engineering insight clause — entire line max 120 characters\nLine 3: '#TOBD #Biology @ICRscience'\nNo URL. No extra text.",
+  "linkedInText": "A LinkedIn post. Format exactly as follows with Unicode bold headers:\n Line 1: A clever question hook that gets to the point — one sentence ending in em dash or question mark\n\n𝗪𝗵𝗮𝘁 𝘁𝗵𝗲𝘆 𝗳𝗼𝘂𝗻𝗱:\n• [factual finding from the study]\n• [factual finding from the study]\n• [factual finding from the study]\n(3-5 bullets of actual evidence from the article. Facts only, no quotes, no interpretation yet.)\n\n𝗧𝗵𝗲 𝗲𝘃𝗼𝗹𝘂𝘁𝗶𝗼𝗻𝗮𝗿𝘆 𝗰𝗹𝗮𝗶𝗺:\n• [their interpretation of the evidence — 1-2 bullets]\n\n𝗧𝗢𝗕𝗗 𝗥𝗲𝘃𝗲𝗿𝘀𝗮𝗹 #𝗡 — 𝘁𝗵𝗲 𝗲𝗻𝗴𝗶𝗻𝗲𝗲𝗿𝗶𝗻𝗴 𝘃𝗶𝗲𝘄:\n• [TOBD insight bullet]\n• [TOBD insight bullet]\n• [TOBD insight bullet]\n\nOne closing sentence connecting the evidence to design.\n\n#TOBD #Biology #CreationScience @ICRscience"
 }`;
 
   try {
@@ -205,7 +220,7 @@ Return ONLY a JSON object with these exact fields, no other text:
       },
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001', // Use Haiku for cost efficiency on batch processing
-        max_tokens: 400,
+        max_tokens: 800,
         messages: [{ role: 'user', content: prompt }]
       })
     });
@@ -231,6 +246,7 @@ Return ONLY a JSON object with these exact fields, no other text:
       reversal: parsed.reversal,
       reversalTitle: parsed.reversalTitle,
       shareText: parsed.shareText,
+      linkedInText: parsed.linkedInText,
     };
   } catch (err) {
     console.error(`TOBD processing failed for "${item.headline}":`, err);
