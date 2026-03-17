@@ -2,6 +2,34 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Working Style
+
+### Plan first
+- For any task with 3+ steps, write a plan to tasks/todo.md before coding
+- Check in with me before starting implementation
+- Mark items complete as you go
+
+### Learn from mistakes
+- After any correction, add the pattern to tasks/lessons.md
+- Review lessons.md at the start of each session
+
+### When something breaks
+- Stop. Don't keep pushing.
+- Tell me what you tried, what happened, and what you think the cause is
+- Fix the root cause, not the symptom
+
+### Done means verified
+- Don't mark a task complete until you can show me it works
+- Tell me exactly how to test it
+
+### Keep it simple
+- Minimize the number of files and dependencies touched
+- If a solution feels complicated, there's probably a simpler way
+
+### Task Tracking
+- `tasks/todo.md` — current task list and known bugs
+- `tasks/lessons.md` — patterns and corrections to avoid repeating mistakes
+
 ## Project Overview
 
 TOBD Explorer is a single-page interactive web app for the Institute for Creation Research's Theory of Biological Design (TOBD), developed by Dr. Randy Guliuzza. It is an independent educational project, not officially affiliated with ICR.

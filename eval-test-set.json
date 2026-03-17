@@ -1,0 +1,213 @@
+[
+  {
+    "_id": "secular-001",
+    "_notes": "SECULAR — Classic CET case. The organism acted; the cave did nothing. Should cleanly hit Reversal #3.",
+    "input": {
+      "source": "Phys.org",
+      "type": "secular",
+      "headline": "Fish lose eyes in just three generations after entering dark caves",
+      "description": "Scientists studying Mexican cavefish discovered that eye degeneration occurred in fewer than three generations after fish moved into dark environments, far faster than previously believed.",
+      "articleText": "Researchers from the University of Maryland placed surface fish into laboratory cave conditions and observed complete eye regression within three generations. The team attributes the change to natural selection acting on existing genetic variation. Lead researcher Dr. Amy Keene stated the cave environment 'selected against eye maintenance' due to its metabolic cost."
+    },
+    "golden": {
+      "tobd": "The cave did nothing — the fish's own internal engineering system responded to a changed environment by reallocating metabolic resources away from eye maintenance. This is Continuous Environmental Tracking in real time: the organism sensed, processed, and acted. The fact that this happened in just three generations rules out gradual random mutation and points instead to a pre-engineered adaptive response.",
+      "reversal": "Reversal #3",
+      "reversalTitle": "Adaptation & Environment",
+      "shareText": "Cavefish lose eyes in 3 generations — not because the cave selected them, but because their own system made the call.\n\nhttps://kestes60.github.io/tobd-explorer\n\n#TOBD #Biology",
+      "linkedInText": "What if losing your eyes was an engineering decision — not an accident?\n\n𝗪𝗵𝗮𝘁 𝘁𝗵𝗲𝘆 𝗳𝗼𝘂𝗻𝗱:\n• Eye degeneration completed in under three generations\n• Occurred under lab conditions, not over geological time\n• Researchers linked the change to metabolic cost reduction\n\n𝗧𝗵𝗲 𝗲𝘃𝗼𝗹𝘂𝘁𝗶𝗼𝗻𝗮𝗿𝘆 𝗰𝗹𝗮𝗶𝗺:\n• The cave environment 'selected against' eye maintenance\n• Random variation + selection pressure drove the change\n\n𝗧𝗢𝗕𝗗 𝗥𝗲𝘃𝗲𝗿𝘀𝗮𝗹 #𝟯 — 𝘁𝗵𝗲 𝗲𝗻𝗴𝗶𝗻𝗲𝗲𝗿𝗶𝗻𝗴 𝘃𝗶𝗲𝘄:\n• The cave is a trigger, not a cause — organisms possess innate sensor-response systems\n• Speed of change (3 generations) rules out random mutation; points to pre-programmed response\n• The organism tracked, sensed, and reallocated — the environment did nothing\n\nThis is Continuous Environmental Tracking: engineered adaptability, not blind chance.\n\n#TOBD #Biology #CreationScience"
+    },
+    "_passCriteria": {
+      "tobdLength": "2-4 sentences",
+      "tobdHitsReversal": "Reversal #3",
+      "creationArticleMode": false,
+      "shareTextUnder250": true,
+      "shareTextNoVerbatimHeadline": true,
+      "linkedInHasBoldHeaders": true
+    }
+  },
+  {
+    "_id": "secular-002",
+    "_notes": "SECULAR — Antibiotic resistance appearing rapidly. Should hit Reversal #4 (engineering causality, not random mutation).",
+    "input": {
+      "source": "EurekAlert",
+      "type": "secular",
+      "headline": "Bacteria develop full antibiotic resistance within hours of drug exposure",
+      "description": "A Harvard Medical School study tracked E. coli developing complete resistance to antibiotics within 11 hours under controlled conditions, using time-lapse photography across a gradient of antibiotic concentrations.",
+      "articleText": "The MEGA-plate experiment showed bacterial populations acquiring resistance mutations and spreading across antibiotic gradients at speeds that surprised researchers. Dr. Michael Baym called the result 'evolution in action.' The study has been widely cited as visual proof of natural selection and mutation driving rapid adaptation."
+    },
+    "golden": {
+      "tobd": "What looks like rapid 'evolution' is actually a pre-engineered resistance toolkit switching on in response to a chemical signal — not random mutation appearing from nowhere. The organism detected the antibiotic, activated existing genetic pathways, and responded purposefully. Reversal #4 applies directly: engineering causality explains what randomness cannot — you don't build a targeted response by accident.",
+      "reversal": "Reversal #4",
+      "reversalTitle": "Causation & Design",
+      "shareText": "Bacteria become fully antibiotic-resistant in hours — pre-engineered response, not random luck.\n\nhttps://kestes60.github.io/tobd-explorer\n\n#TOBD #Biology",
+      "linkedInText": "Can random mutation really build a targeted drug-resistance system in 11 hours?\n\n𝗪𝗵𝗮𝘁 𝘁𝗵𝗲𝘆 𝗳𝗼𝘂𝗻𝗱:\n• E. coli developed complete antibiotic resistance in under 11 hours\n• Resistance spread across a drug concentration gradient\n• The study used time-lapse photography to document each step\n\n𝗧𝗵𝗲 𝗲𝘃𝗼𝗹𝘂𝘁𝗶𝗼𝗻𝗮𝗿𝘆 𝗰𝗹𝗮𝗶𝗺:\n• Random mutation + natural selection produced the resistance\n• Described as 'evolution in action' and proof of Darwinian mechanism\n\n𝗧𝗢𝗕𝗗 𝗥𝗲𝘃𝗲𝗿𝘀𝗮𝗹 #𝟰 — 𝘁𝗵𝗲 𝗲𝗻𝗴𝗶𝗻𝗲𝗲𝗿𝗶𝗻𝗴 𝘃𝗶𝗲𝘄:\n• Speed and specificity of the response are signatures of a designed system, not chance\n• Organisms possess pre-loaded genetic toolkits that activate on chemical signals\n• Engineering causality — not randomness — is the only adequate explanation\n\nWhen a system responds this precisely, this fast, you don't call it luck — you call it engineering.\n\n#TOBD #Biology #CreationScience"
+    },
+    "_passCriteria": {
+      "tobdLength": "2-4 sentences",
+      "tobdHitsReversal": "Reversal #4",
+      "creationArticleMode": false,
+      "shareTextUnder250": true,
+      "shareTextNoVerbatimHeadline": true,
+      "linkedInHasBoldHeaders": true
+    }
+  },
+  {
+    "_id": "secular-003",
+    "_notes": "SECULAR — Convergent evolution / identical genes in bats and dolphins. Classic Reversal #6 (Common Design, not Common Ancestry).",
+    "input": {
+      "source": "Phys.org",
+      "type": "secular",
+      "headline": "Bats and dolphins independently evolved identical gene sequences for echolocation",
+      "description": "Genomic analysis reveals that bats and dolphins share nearly identical versions of the Prestin gene — which enables high-frequency hearing — despite having no recent common ancestor.",
+      "articleText": "Researchers at Queen Mary University of London found over 200 identical amino acid changes in the Prestin gene across echolocating bats and dolphins — lineages separated by 90 million years of evolutionary history. Lead author Stephen Rossiter called it 'one of the best examples of convergent evolution ever found.' The evolutionary explanation is that selection pressure independently drove the same genetic solution in both groups."
+    },
+    "golden": {
+      "tobd": "When engineers solve the same problem twice, they reach for the same proven solution — that's not coincidence, it's good design practice. Finding 200 identical genetic changes across mammals separated by '90 million years' is not what random convergence looks like; it's what a shared engineering library looks like. Reversal #6 predicted this: one Designer, one toolkit, reused across different creatures.",
+      "reversal": "Reversal #6",
+      "reversalTitle": "Common Design vs. Common Ancestry",
+      "shareText": "Bats and dolphins share identical echolocation genes — same Designer, not same ancestor.\n\nhttps://kestes60.github.io/tobd-explorer\n\n#TOBD #Biology",
+      "linkedInText": "200 identical genetic changes in two unrelated species — coincidence, or engineering?\n\n𝗪𝗵𝗮𝘁 𝘁𝗵𝗲𝘆 𝗳𝗼𝘂𝗻𝗱:\n• Over 200 identical amino acid changes in the Prestin gene across bats and dolphins\n• These lineages share no recent common ancestor\n• The gene changes are linked to high-frequency hearing used in echolocation\n\n𝗧𝗵𝗲 𝗲𝘃𝗼𝗹𝘂𝘁𝗶𝗼𝗻𝗮𝗿𝘆 𝗰𝗹𝗮𝗶𝗺:\n• Selection pressure independently drove the same solution in both lineages\n• Called 'one of the best examples of convergent evolution ever found'\n\n𝗧𝗢𝗕𝗗 𝗥𝗲𝘃𝗲𝗿𝘀𝗮𝗹 #𝟲 — 𝘁𝗵𝗲 𝗲𝗻𝗴𝗶𝗻𝗲𝗲𝗿𝗶𝗻𝗴 𝘃𝗶𝗲𝘄:\n• Engineers reuse proven solutions — 200 identical changes is a design signature, not a coincidence\n• Common Design predicts identical solutions across unrelated creatures; common ancestry does not\n• One Designer, one engineering playbook, applied wherever the problem demands it\n\nThe more 'convergent evolution' researchers find, the more it looks like Common Design.\n\n#TOBD #Biology #CreationScience"
+    },
+    "_passCriteria": {
+      "tobdLength": "2-4 sentences",
+      "tobdHitsReversal": "Reversal #6",
+      "creationArticleMode": false,
+      "shareTextUnder250": true,
+      "shareTextNoVerbatimHeadline": true,
+      "linkedInHasBoldHeaders": true
+    }
+  },
+  {
+    "_id": "secular-004",
+    "_notes": "SECULAR — Embryonic developmental timing. Should hit Reversal #1 (life enables biology). Watch that Haiku doesn't drift to Reversal #4.",
+    "input": {
+      "source": "EurekAlert",
+      "type": "secular",
+      "headline": "Embryos use internal molecular clocks to sequence organ development with millisecond precision",
+      "description": "Researchers discovered that vertebrate embryos rely on oscillating genetic circuits — called segmentation clocks — to time the formation of body segments with extraordinary precision.",
+      "articleText": "A study from UCSF found that embryonic segmentation clocks operate at species-specific frequencies tuned to body temperature, metabolic rate, and developmental stage. The clocks are self-correcting and can compensate for temperature fluctuations. Senior author Alexander Schier said the system 'seems almost too perfect to have evolved by chance,' though the paper attributes it to natural selection acting on regulatory networks."
+    },
+    "golden": {
+      "tobd": "An embryo operating with self-correcting molecular clocks, tuned to temperature and metabolic rate, is not a chemistry accident — it is a programmed system running a construction schedule. Life is what makes these purposeful sequences possible; no arrangement of nonliving chemicals can produce a self-correcting timer. This is Reversal #1: life enables biology, biology does not generate life.",
+      "reversal": "Reversal #1",
+      "reversalTitle": "Life & Operations",
+      "shareText": "Embryos run self-correcting molecular clocks to build bodies with precision — that's not chemistry, that's engineering.\n\nhttps://kestes60.github.io/tobd-explorer\n\n#TOBD #Biology",
+      "linkedInText": "When a system self-corrects for temperature fluctuations while building a body from scratch — what do you call that?\n\n𝗪𝗵𝗮𝘁 𝘁𝗵𝗲𝘆 𝗳𝗼𝘂𝗻𝗱:\n• Vertebrate embryos use oscillating genetic circuits to time organ formation\n• The clocks are self-correcting and compensate for temperature changes\n• Clock frequency is tuned to species-specific metabolic rate and developmental stage\n\n𝗧𝗵𝗲 𝗲𝘃𝗼𝗹𝘂𝘁𝗶𝗼𝗻𝗮𝗿𝘆 𝗰𝗹𝗮𝗶𝗺:\n• Natural selection acting on regulatory networks produced the system\n• Even the lead researcher noted it 'seems almost too perfect to have evolved by chance'\n\n𝗧𝗢𝗕𝗗 𝗥𝗲𝘃𝗲𝗿𝘀𝗮𝗹 #𝟭 — 𝘁𝗵𝗲 𝗲𝗻𝗴𝗶𝗻𝗲𝗲𝗿𝗶𝗻𝗴 𝘃𝗶𝗲𝘄:\n• A self-correcting, precision-timed construction sequence is a signature of life — not a product of chemistry\n• No nonliving system produces a purposeful, goal-directed timer; only life does\n• Life enables purposeful biology; chemistry alone can never generate this kind of order\n\nLife enables biology. Biology does not generate life.\n\n#TOBD #Biology #CreationScience"
+    },
+    "_passCriteria": {
+      "tobdLength": "2-4 sentences",
+      "tobdHitsReversal": "Reversal #1",
+      "creationArticleMode": false,
+      "shareTextUnder250": true,
+      "shareTextNoVerbatimHeadline": true,
+      "linkedInHasBoldHeaders": true
+    }
+  },
+  {
+    "_id": "secular-005",
+    "_notes": "SECULAR — Fruit fly actively choosing environment. Clear Reversal #2 (organism as agent, not passive product).",
+    "input": {
+      "source": "Phys.org",
+      "type": "secular",
+      "headline": "Fruit flies actively seek temperature zones that protect their gene expression",
+      "description": "New research shows Drosophila actively navigate to specific thermal environments that optimize protein folding and gene expression, suggesting behavior plays a larger role in adaptation than previously recognized.",
+      "articleText": "Researchers at Duke University found that fruit flies, when given a choice of thermal environments, consistently select temperatures that optimize heat shock protein expression. Flies with mutations affecting heat-sensing neurons lost this ability and showed impaired gene expression outcomes. The team concluded that behavior-environment feedback loops contribute significantly to 'natural selection acting on thermal tolerance.'"
+    },
+    "golden": {
+      "tobd": "The fruit fly is not being shaped by its environment — it is actively choosing its environment using built-in thermal sensors to optimize its own gene expression. This is Reversal #2 in the clearest possible terms: the organism is the agent, acting with purpose toward a functional goal. The environment is not the sculptor; the organism is the engineer of its own circumstances.",
+      "reversal": "Reversal #2",
+      "reversalTitle": "Agency & Purpose",
+      "shareText": "Fruit flies actively navigate to temperatures that protect their own gene expression — organisms are agents, not clay.\n\nhttps://kestes60.github.io/tobd-explorer\n\n#TOBD #Biology",
+      "linkedInText": "A fruit fly finds the exact temperature its genes need. Every time. Using a sensor. What do you call that?\n\n𝗪𝗵𝗮𝘁 𝘁𝗵𝗲𝘆 𝗳𝗼𝘂𝗻𝗱:\n• Fruit flies navigate to specific thermal zones that optimize protein folding\n• Flies use heat-sensing neurons to detect and select preferred temperatures\n• Flies with damaged heat sensors lost the ability and showed worse gene expression outcomes\n\n𝗧𝗵𝗲 𝗲𝘃𝗼𝗹𝘂𝘁𝗶𝗼𝗻𝗮𝗿𝘆 𝗰𝗹𝗮𝗶𝗺:\n• Behavior-environment feedback loops contribute to natural selection acting on thermal tolerance\n• The organism is shaped by its thermal environment over time\n\n𝗧𝗢𝗕𝗗 𝗥𝗲𝘃𝗲𝗿𝘀𝗮𝗹 #𝟮 — 𝘁𝗵𝗲 𝗲𝗻𝗴𝗶𝗻𝗲𝗲𝗿𝗶𝗻𝗴 𝘃𝗶𝗲𝘄:\n• The fly is not being shaped by the environment — it is actively shaping its own experience of it\n• Built-in sensor systems let organisms pursue functional goals; this is agency, not passivity\n• Traits exist before environmental exposure — the design came first\n\nOrganisms are goal-directed agents. The environment is just the trigger.\n\n#TOBD #Biology #CreationScience"
+    },
+    "_passCriteria": {
+      "tobdLength": "2-4 sentences",
+      "tobdHitsReversal": "Reversal #2",
+      "creationArticleMode": false,
+      "shareTextUnder250": true,
+      "shareTextNoVerbatimHeadline": true,
+      "linkedInHasBoldHeaders": true
+    }
+  },
+  {
+    "_id": "creation-001",
+    "_notes": "CREATION — ICR article explicitly about CET. Should HIGHLIGHT the engineering insight, not reinterpret it. tobd should open with what the article argues, not 'through the TOBD lens...'",
+    "input": {
+      "source": "ICR.org",
+      "type": "creation",
+      "headline": "Dr. Guliuzza: Continuous Environmental Tracking explains rapid adaptation without evolution",
+      "description": "Dr. Randy Guliuzza presents the CET model as a complete engineering-based alternative to evolutionary adaptation, showing that organisms use innate sensor-processor-effector systems to respond to environmental changes.",
+      "articleText": "Dr. Guliuzza argues that all observed biological adaptation can be explained by pre-programmed internal systems rather than external selection acting on random variation. He identifies five engineering principles present in organisms: environmental sensors, signal processors, logic-based decision systems, effector mechanisms, and feedback loops. This mirrors industrial control systems and points to intentional design."
+    },
+    "golden": {
+      "tobd": "Dr. Guliuzza lays out the engineering architecture of adaptation here: sensors, processors, effectors, and feedback loops — the same components found in industrial control systems. This is the CET model's core claim, and it illustrates Reversal #3 directly: adaptation is not something that happens to an organism, it is something an organism does. The design came first; the environment is just the input.",
+      "reversal": "Reversal #3",
+      "reversalTitle": "Adaptation & Environment",
+      "shareText": "Dr. Guliuzza maps the exact engineering architecture inside organisms that drives all adaptation — sensors, processors, feedback loops.\n\nhttps://kestes60.github.io/tobd-explorer\n\n#TOBD #Biology",
+      "linkedInText": "What if every organism comes pre-loaded with an industrial-grade adaptive control system?\n\n𝗪𝗵𝗮𝘁 𝗗𝗿. 𝗚𝘂𝗹𝗶𝘂𝘇𝘇𝗮 𝗮𝗿𝗴𝘂𝗲𝘀:\n• All observed adaptation can be explained by innate pre-programmed systems\n• Organisms possess five identifiable engineering components: sensors, processors, logic systems, effectors, and feedback loops\n• This architecture mirrors industrial control systems — purposefully designed, not accidentally assembled\n\n𝗪𝗵𝘆 𝘁𝗵𝗶𝘀 𝗺𝗮𝘁𝘁𝗲𝗿𝘀 𝗳𝗼𝗿 𝗯𝗶𝗼𝗹𝗼𝗴𝘆:\n• CET replaces 'selection pressure' with an identifiable, testable engineering mechanism\n• Adaptation becomes something organisms do — not something environments do to them\n\n𝗧𝗢𝗕𝗗 𝗥𝗲𝘃𝗲𝗿𝘀𝗮𝗹 #𝟯 𝗶𝗻 𝗳𝘂𝗹𝗹:\n• The organism is the active agent; the environment is merely the trigger\n• Design precedes function — the system was built to track, not built by tracking\n• This is not a tweak to evolutionary theory; it is a complete replacement of its causation model\n\nThe engineering is already there. We just stopped giving the environment the credit.\n\n#TOBD #Biology #CreationScience"
+    },
+    "_passCriteria": {
+      "tobdLength": "2-4 sentences",
+      "tobdHitsReversal": "Reversal #3",
+      "creationArticleMode": true,
+      "tobdHighlightsNotReinterprets": true,
+      "shareTextUnder250": true,
+      "shareTextNoVerbatimHeadline": true,
+      "linkedInHasBoldHeaders": true
+    }
+  },
+  {
+    "_id": "creation-002",
+    "_notes": "CREATION — Acts & Facts article on owl feather engineering. Should HIGHLIGHT, not reinterpret. tobd should surface the engineering point the article already makes.",
+    "input": {
+      "source": "Acts & Facts",
+      "type": "creation",
+      "headline": "Owl feathers achieve acoustic perfection that challenges the limits of human measurement",
+      "description": "A study of barn owl flight feathers reveals aeroacoustic engineering so refined that available laboratory microphones cannot fully capture the silence of their flight, pointing to optimized design.",
+      "articleText": "Acts & Facts reports on research showing that owl feather serrations, velvet surfaces, and flexible fringes work together as a multi-layer acoustic suppression system. Each feature addresses a different frequency band of noise. Researchers noted that the system's performance 'approaches the physical limits of what is measurable.' The article argues this level of optimization — targeting a specific functional outcome across multiple physical domains — is the hallmark of intentional engineering."
+    },
+    "golden": {
+      "tobd": "The owl feather system described here — multiple layers each targeting a different frequency band, achieving performance at the edge of measurability — is exactly what optimization toward a goal looks like. This article surfaces a key engineering insight: functional complexity this precise does not accumulate by accident, it is specified. Reversal #4 is the frame: engineering causality, not selection pressure, is the only adequate explanation for a system this targeted.",
+      "reversal": "Reversal #4",
+      "reversalTitle": "Causation & Design",
+      "shareText": "Owl feathers achieve acoustic suppression so precise it maxes out laboratory microphones — that's specification, not accident.\n\nhttps://kestes60.github.io/tobd-explorer\n\n#TOBD #Biology",
+      "linkedInText": "When your measurement equipment can't keep up with a feather — you're looking at engineering, not evolution.\n\n𝗪𝗵𝗮𝘁 𝘁𝗵𝗲 𝗿𝗲𝘀𝗲𝗮𝗿𝗰𝗵 𝘀𝗵𝗼𝘄𝘀:\n• Owl feather serrations, velvet surfaces, and fringes each target a different frequency band of noise\n• The combined system approaches the physical limits of what laboratory microphones can measure\n• Multiple structural features work in concert toward a single functional outcome: silent flight\n\n𝗧𝗵𝗲 𝗲𝗻𝗴𝗶𝗻𝗲𝗲𝗿𝗶𝗻𝗴 𝗶𝗻𝘀𝗶𝗴𝗵𝘁:\n• Multi-domain optimization toward a specific goal is the definition of intentional design\n• No selective process explains why multiple independent features all converge on the same acoustic target\n\n𝗧𝗢𝗕𝗗 𝗥𝗲𝘃𝗲𝗿𝘀𝗮𝗹 #𝟰 — 𝗲𝗻𝗴𝗶𝗻𝗲𝗲𝗿𝗶𝗻𝗴 𝗰𝗮𝘂𝘀𝗮𝗹𝗶𝘁𝘆:\n• When a system is optimized across multiple physical domains simultaneously, the cause is specification\n• Engineering causality demands a goal — and this system has one\n• Selection pressure cannot specify; only a Designer can\n\nThe most likely reason something looks engineered to perfection is that it is.\n\n#TOBD #Biology #CreationScience"
+    },
+    "_passCriteria": {
+      "tobdLength": "2-4 sentences",
+      "tobdHitsReversal": "Reversal #4",
+      "creationArticleMode": true,
+      "tobdHighlightsNotReinterprets": true,
+      "shareTextUnder250": true,
+      "shareTextNoVerbatimHeadline": true,
+      "linkedInHasBoldHeaders": true
+    }
+  },
+  {
+    "_id": "creation-003",
+    "_notes": "CREATION — ARJ baraminology article. Designed discontinuities between kinds. Should hit Reversal #5 (internalism). Must highlight, not reinterpret. Watch that Haiku doesn't drift to Reversal #6.",
+    "input": {
+      "source": "ARJ",
+      "type": "creation",
+      "headline": "Baraminological analysis finds clear engineered boundaries separating vertebrate families",
+      "description": "A peer-reviewed study in the Answers Research Journal used statistical baraminology to identify discontinuities between vertebrate families, arguing these boundaries reflect designed created kinds rather than gaps in an evolving lineage.",
+      "articleText": "The study by McLain et al. applied multidimensional scaling and cluster analysis to morphological datasets across vertebrate classes. The authors found statistically significant clustering that does not bridge across family boundaries, even when using the most inclusive data sets. They argue these discontinuities are not artifacts of incomplete fossil records but represent real biological boundaries consistent with the biblical concept of created kinds — each with its own innate traits and adaptive potential."
+    },
+    "golden": {
+      "tobd": "The discontinuities this study finds between vertebrate families are not gaps waiting to be filled by undiscovered fossils — they are real biological boundaries that reflect designed differences in innate traits and adaptive capability. Each kind arrives with its own pre-specified engineering; what a creature can become is set by what it was built to be. This is Reversal #5: internal design determines biological range, not external history.",
+      "reversal": "Reversal #5",
+      "reversalTitle": "Externalism vs. Internalism",
+      "shareText": "Statistical analysis of vertebrate families finds real biological boundaries between kinds — boundaries that evolution predicts shouldn't exist.\n\nhttps://kestes60.github.io/tobd-explorer\n\n#TOBD #Biology",
+      "linkedInText": "What if the gaps in the fossil record aren't missing data — but actual boundaries that were always there?\n\n𝗪𝗵𝗮𝘁 𝘁𝗵𝗲 𝘀𝘁𝘂𝗱𝘆 𝗳𝗼𝘂𝗻𝗱:\n• Multidimensional statistical analysis found significant clustering within vertebrate families\n• No data bridged across family boundaries, even with the most inclusive datasets\n• Discontinuities were consistent across multiple analytical methods\n\n𝗪𝗵𝘆 𝘁𝗵𝗶𝘀 𝗰𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲𝘀 𝗲𝘃𝗼𝗹𝘂𝘁𝗶𝗼𝗻𝗮𝗿𝘆 𝘁𝗵𝗲𝗼𝗿𝘆:\n• A continuous tree of life predicts blurry, bridgeable boundaries — not statistically hard stops\n• Calling every discontinuity a 'gap in the fossil record' is unfalsifiable and ad hoc\n\n𝗧𝗢𝗕𝗗 𝗥𝗲𝘃𝗲𝗿𝘀𝗮𝗹 #𝟱 — 𝗶𝗻𝘁𝗲𝗿𝗻𝗮𝗹𝗶𝘀𝗺:\n• Each created kind carries its own innate traits and adaptive range — set at creation, not accumulated over time\n• Boundaries between kinds reflect differences in internal engineering, not missing transitional history\n• What an organism can become is determined by what it was built to be\n\nThe boundaries aren't missing. They were designed in.\n\n#TOBD #Biology #CreationScience"
+    },
+    "_passCriteria": {
+      "tobdLength": "2-4 sentences",
+      "tobdHitsReversal": "Reversal #5",
+      "creationArticleMode": true,
+      "tobdHighlightsNotReinterprets": true,
+      "shareTextUnder250": true,
+      "shareTextNoVerbatimHeadline": true,
+      "linkedInHasBoldHeaders": true
+    }
+  }
+]
