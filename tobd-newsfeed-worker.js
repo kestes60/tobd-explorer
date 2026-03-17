@@ -203,12 +203,40 @@ Headline: "${item.headline}"
 Summary: ${item.description || '(no summary available)'}
 Full article text: ${articleText || '(not available)'}
 
+REVERSAL SELECTION — follow these rules carefully:
+
+Read the article and identify the single most applicable TOBD reversal. Base your selection strictly on the core biological phenomenon described:
+
+- If the article is about TIMING, SEQUENCING, or COORDINATION of biological processes (clocks, developmental staging, synchronized events) → strongly favor Reversal #1
+- If the article is about organisms TRACKING, SENSING, or RESPONDING to environmental conditions (temperature, light, chemicals, habitat) → strongly favor Reversal #2
+- If the article is about RAPID ADAPTATION, LOSS OF FUNCTION, or organisms changing traits quickly in response to new conditions (cave animals losing eyes, antibiotic resistance emerging fast, CET-style tracking) → strongly favor Reversal #3
+- If the article is about ENGINEERING PRECISION, OPTIMIZED STRUCTURES, or physical performance at measurable limits (feathers, sensors, biomechanics, acoustic or optical perfection) → strongly favor Reversal #4
+- If the article is about BOUNDARIES, DISCONTINUITIES, or LIMITS on biological variation (baraminology, species boundaries, what organisms cannot become) → strongly favor Reversal #5
+- If the article is about CONVERGENCE — the same trait or sequence appearing independently in unrelated lineages — → strongly favor Reversal #6
+
+Do not default to Reversal #2 or #5 when another reversal is a better fit. Select exactly one reversal and use it consistently across all fields.
+
+CREATION SCIENCE ARTICLE MODE:
+If the source is labeled "creation science," the author is already making a design-based argument. Do NOT reinterpret their evidence as if it were a secular source. Instead:
+- Lead the "tobd" field by summarizing what the author or article argues
+- Then connect that argument to the relevant TOBD reversal
+- Example opening: "The author argues that... This directly illustrates Reversal #N..."
+- Do NOT open with "This article demonstrates Reversal #N in action"
+
+SHARE TEXT LENGTH RULE — this is a hard constraint:
+The entire shareText value, including all newlines, must be 250 characters or fewer. To stay within this limit:
+- Line 1 (paraphrased headline): max 55 characters including quotes
+- Line 2 ('TOBD Reversal #N in action:' + insight clause): max 90 characters total
+- Line 3 ('#TOBD #Biology @ICRscience'): 26 characters
+- Account for 2 newline characters between lines
+- If a draft exceeds 250 characters, shorten Line 1 or Line 2 before finalizing
+
 Return ONLY a JSON object with these exact fields, no other text:
 {
   "tobd": "2-4 sentence TOBD interpretation. Connect to the relevant reversal. Clear and accessible.",
   "reversal": "Reversal #N",
   "reversalTitle": "Title of the reversal",
-  "shareText": "X post. Four lines exactly:\nLine 1: Paraphrased headline in double quotes — max 60 characters\nLine 2: 'TOBD Reversal #N in action:' then one tight engineering insight clause — entire line max 120 characters\nLine 3: '#TOBD #Biology @ICRscience'\nNo URL. No extra text.",
+  "shareText": "X post. Four lines exactly:\nLine 1: Paraphrased headline in double quotes — max 55 characters\nLine 2: 'TOBD Reversal #N in action:' then one tight engineering insight clause — entire line max 90 characters\nLine 3: '#TOBD #Biology @ICRscience'\nNo URL. No extra text. Total character count including newlines must not exceed 250.",
   "linkedInText": "A LinkedIn post. Format exactly as follows with Unicode bold headers:\n Line 1: A clever question hook that gets to the point — one sentence ending in em dash or question mark\n\n𝗪𝗵𝗮𝘁 𝘁𝗵𝗲𝘆 𝗳𝗼𝘂𝗻𝗱:\n• [factual finding from the study]\n• [factual finding from the study]\n• [factual finding from the study]\n(3-5 bullets of actual evidence from the article. Facts only, no quotes, no interpretation yet.)\n\n𝗧𝗵𝗲 𝗲𝘃𝗼𝗹𝘂𝘁𝗶𝗼𝗻𝗮𝗿𝘆 𝗰𝗹𝗮𝗶𝗺:\n• [their interpretation of the evidence — 1-2 bullets]\n\n𝗧𝗢𝗕𝗗 𝗥𝗲𝘃𝗲𝗿𝘀𝗮𝗹 #𝗡 — 𝘁𝗵𝗲 𝗲𝗻𝗴𝗶𝗻𝗲𝗲𝗿𝗶𝗻𝗴 𝘃𝗶𝗲𝘄:\n• [TOBD insight bullet]\n• [TOBD insight bullet]\n• [TOBD insight bullet]\n\nOne closing sentence connecting the evidence to design.\n\n#TOBD #Biology #CreationScience"
 }`;
 
