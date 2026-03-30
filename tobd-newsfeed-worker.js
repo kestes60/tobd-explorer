@@ -178,7 +178,9 @@ async function fetchArticleText(url) {
     if (!res.ok) return '';
     const html = await res.text();
     // Strip tags, remove characters that break JSON, collapse whitespace, take first 1500 chars
-    return html.replace(/<[^>]+>/g, ' ').replace(/["`{}\\]/g, '').replace(/\s+/g, ' ').trim().slice(0, 1500);
+    const cleaned = html.replace(/<[^>]+>/g, ' ').replace(/["`{}\\]/g, '').replace(/\s+/g, ' ').trim().slice(0, 1500);
+    console.log(`fetchArticleText [${url}]: ${cleaned.slice(0, 100)}`);
+    return cleaned;
   } catch {
     return '';
   }
