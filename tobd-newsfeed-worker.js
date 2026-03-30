@@ -177,8 +177,14 @@ async function fetchArticleText(url) {
     const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; TOBDExplorerBot/1.0)' } });
     if (!res.ok) return '';
     const html = await res.text();
-    // Strip tags, remove characters that break JSON, collapse whitespace, take first 1500 chars
-    const cleaned = html.replace(/<[^>]+>/g, ' ').replace(/["`{}\\]/g, '').replace(/\s+/g, ' ').trim().slice(0, 1500);
+    // Strip tags, JSON-LD schema data, and characters that break JSON; collapse whitespace
+    const cleaned = html
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/@context[^<\n]*/gi, '')
+      .replace(/["`{}\\@:\u201c\u201d\u2018\u2019]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 1500);
     console.log(`fetchArticleText [${url}]: ${cleaned.slice(0, 100)}`);
     return cleaned;
   } catch {
