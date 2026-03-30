@@ -21,12 +21,12 @@ const MAX_ITEMS = 30; // Max items to keep in feed
 
 // ─── RSS Feed Sources ─────────────────────────────────────────────────────────
 const SOURCES = [
-  { name: 'ICR.org',       type: 'creation', url: 'https://www.icr.org/rss/news.xml' },
-  { name: 'Acts & Facts',  type: 'creation', url: 'https://www.icr.org/rss/acts_facts.xml' },
-  { name: 'ARJ',           type: 'creation', url: 'https://answersresearchjournal.org/feed/' },
-  { name: 'AiG',           type: 'creation', url: 'https://answersingenesis.org/feed/' },
-  { name: 'Phys.org',    type: 'secular', url: 'https://phys.org/rss-feed/biology-news/' },
-  { name: 'EurekAlert',  type: 'secular', url: 'https://www.eurekalert.org/rss.xml' },
+  { name: 'ICR.org',      type: 'creation', url: 'https://www.icr.org/rss/the_creation_podcast.xml' },
+  { name: 'AiG',          type: 'creation', url: 'https://answersingenesis.org/feeds/articles/' },
+  { name: 'Phys.org',     type: 'secular',  url: 'https://phys.org/rss-feed/biology-news/' },
+  { name: 'EurekAlert',   type: 'secular',  url: 'https://www.eurekalert.org/rss/biology.xml' },
+  { name: 'Science Daily', type: 'secular', url: 'https://www.sciencedaily.com/rss/plants_animals.xml' },
+  { name: 'Science Daily', type: 'secular', url: 'https://www.sciencedaily.com/rss/strange_offbeat/plants_and_animals.xml' },
 ];
 
 // ─── TOBD Reversal reference (for Claude's context) ───────────────────────────
@@ -115,8 +115,7 @@ async function runFeedUpdate(env) {
 
 // ─── RSS Fetcher & Parser ──────────────────────────────────────────────────────
 async function fetchRSS(source) {
-  const proxyURL = `https://api.allorigins.win/raw?url=${encodeURIComponent(source.url)}`;
-  const res = await fetch(proxyURL, {
+  const res = await fetch(source.url, {
     headers: { 'User-Agent': 'Mozilla/5.0 (compatible; TOBDExplorerBot/1.0)' }
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -175,8 +174,7 @@ function formatDate(raw) {
 // ─── Article Text Fetcher ─────────────────────────────────────────────────────
 async function fetchArticleText(url) {
   try {
-    const proxyURL = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-    const res = await fetch(proxyURL, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; TOBDExplorerBot/1.0)' } });
+    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; TOBDExplorerBot/1.0)' } });
     if (!res.ok) return '';
     const html = await res.text();
     // Strip tags and collapse whitespace, take first 3000 chars
