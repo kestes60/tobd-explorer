@@ -177,8 +177,8 @@ async function fetchArticleText(url) {
     const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; TOBDExplorerBot/1.0)' } });
     if (!res.ok) return '';
     const html = await res.text();
-    // Strip tags, remove quotes/backticks that break JSON, collapse whitespace, take first 1500 chars
-    return html.replace(/<[^>]+>/g, ' ').replace(/["`]/g, '').replace(/\s+/g, ' ').trim().slice(0, 1500);
+    // Strip tags, remove characters that break JSON, collapse whitespace, take first 1500 chars
+    return html.replace(/<[^>]+>/g, ' ').replace(/["`{}\\]/g, '').replace(/\s+/g, ' ').trim().slice(0, 1500);
   } catch {
     return '';
   }
