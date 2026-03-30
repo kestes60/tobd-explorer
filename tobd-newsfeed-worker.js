@@ -21,12 +21,12 @@ const MAX_ITEMS = 30; // Max items to keep in feed
 
 // ─── RSS Feed Sources ─────────────────────────────────────────────────────────
 const SOURCES = [
-  { name: 'ICR.org',      type: 'creation', url: 'https://www.icr.org/rss/the_creation_podcast.xml' },
-  { name: 'AiG',          type: 'creation', url: 'https://answersingenesis.org/feeds/articles/' },
-  { name: 'Phys.org',     type: 'secular',  url: 'https://phys.org/rss-feed/biology-news/' },
-  { name: 'EurekAlert',   type: 'secular',  url: 'https://www.eurekalert.org/rss/biology.xml' },
-  { name: 'Science Daily', type: 'secular', url: 'https://www.sciencedaily.com/rss/plants_animals.xml' },
-  { name: 'Science Daily', type: 'secular', url: 'https://www.sciencedaily.com/rss/strange_offbeat/plants_and_animals.xml' },
+  { name: 'ICR.org',         type: 'creation', url: 'https://www.icr.org/rss/the_creation_podcast.xml' },
+  { name: 'Evolution News',  type: 'secular',  url: 'https://evolutionnews.org/feed/' },
+  { name: 'Phys.org',        type: 'secular',  url: 'https://phys.org/rss-feed/biology-news/' },
+  { name: 'Science Daily',   type: 'secular',  url: 'https://www.sciencedaily.com/rss/plants_animals/evolution.xml' },
+  { name: 'Science Daily',   type: 'secular',  url: 'https://www.sciencedaily.com/rss/plants_animals/genetics.xml' },
+  { name: 'Medical Xpress',  type: 'secular',  url: 'https://medicalxpress.com/rss-feed/' },
 ];
 
 // ─── TOBD Reversal reference (for Claude's context) ───────────────────────────
@@ -177,8 +177,8 @@ async function fetchArticleText(url) {
     const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; TOBDExplorerBot/1.0)' } });
     if (!res.ok) return '';
     const html = await res.text();
-    // Strip tags and collapse whitespace, take first 3000 chars
-    return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 3000);
+    // Strip tags, remove quotes/backticks that break JSON, collapse whitespace, take first 1500 chars
+    return html.replace(/<[^>]+>/g, ' ').replace(/["`]/g, '').replace(/\s+/g, ' ').trim().slice(0, 1500);
   } catch {
     return '';
   }
